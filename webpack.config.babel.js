@@ -1,9 +1,9 @@
 /*
     ./webpack.config.js
 */
-const path = require('path');
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import  path from 'path'
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './index.html',
   filename: 'index.html',
@@ -19,8 +19,12 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.css$/, loader: 'style-loader!css-loader'}
     ]
   },
+  // resolve: { 
+  //   root: path.resolve('./src') // THIS ALLOWS FOR EXPORTING WITH 'components' INSTEAD OF '../components'
+  // },
   plugins: [HtmlWebpackPluginConfig]
 }
