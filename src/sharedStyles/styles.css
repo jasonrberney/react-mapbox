@@ -1,0 +1,14 @@
+.largeHeader {
+    color: #4a90e2;
+    font-weight: 100;
+    font-size: 100px;
+    margin-bottom: 20px;
+}
+
+.centeredContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  

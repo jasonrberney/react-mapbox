@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//import { createReactClass } from 'react'
 
 class AppContainer extends Component {
     render () {
@@ -10,12 +9,5 @@ class AppContainer extends Component {
         )
     }
 }
-// const AppContainer = React.createClass({
-//     render () {
-//         return (
-//         <p>{'Hello World!'}</p>
-//         )
-//     },
-// })
 
 export default AppContainer
