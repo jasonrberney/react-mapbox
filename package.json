@@ -8,6 +8,7 @@
     "production": "webpack -p"
   },
   "dependencies": {
+    "babel-eslint": "^8.2.1",
     "css-loader": "^0.28.9",
     "html-webpack-plugin": "^2.30.1",
     "path": "^0.12.7",

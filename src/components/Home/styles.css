@@ -1,7 +1,19 @@
 .container {
-    composes: centeredContainer from 'sharedStyles/styles.css';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .title {
-    composes: largeHeader from 'sharedStyles/styles.css'
+    color: #9CBA7F;
+    font-weight: 100;
+    font-size: 100px;
+    margin-bottom: 20px;
 }
+
+/*
+.container {
+    composes: centeredContainer from 'sharedStyles/styles.css';
+}
+*/
