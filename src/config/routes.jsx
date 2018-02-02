@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import AppContainer from '../containers/App/AppContainer.jsx'
+import MapContainer from '../containers/Map/MapContainer.jsx'
 import HomeContainer from '../containers/Home/HomeContainer.jsx'
 import Navigation from '../components/Navigation/Navigation.jsx'
 
@@ -10,7 +10,7 @@ const routes = (
             <Navigation />
             <Switch>
                 <Route exact path='/' component={HomeContainer} />
-                <Route exact path='/test' component={AppContainer} />
+                <Route path='/mapjournal' component={MapContainer} />
             </Switch>
         </div>
     </Router>

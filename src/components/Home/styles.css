@@ -12,6 +12,15 @@
     margin-bottom: 20px;
 }
 
+.subHeader {
+    color: #458B00;
+    font-size: 35px;
+    text-align: center;
+    line-height: 55px;
+    font-weight: 100;
+    padding: 0 125px 0 125px;
+}
+
 /*
 .container {
     composes: centeredContainer from 'sharedStyles/styles.css';
