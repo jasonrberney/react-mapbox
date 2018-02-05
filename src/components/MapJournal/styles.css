@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.latlng {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold" */
+}
