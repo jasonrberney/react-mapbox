@@ -12,7 +12,7 @@ class Navigation extends Component {
                             <NavLink exact className='link' activeClassName='active' to='/'>{'Home'}</NavLink>
                         </li>
                         <li>
-                            <NavLink className='link' activeClassName='active' to='/mapjournal'>{'Map Journal'}</NavLink>
+                            <NavLink exact className='link' activeClassName='active' to='/mapjournal'>{'Map Journal'}</NavLink>
                         </li>
                     </ul>
                 </nav>

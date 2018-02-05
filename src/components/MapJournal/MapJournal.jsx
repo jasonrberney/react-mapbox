@@ -40,7 +40,7 @@ class MapJournal extends Component {
         const style = {
             position: 'absolute',
             top: '15%',
-            bottom: '5%',
+            bottom: '1.5%',
             width: '99%'
         };
 
