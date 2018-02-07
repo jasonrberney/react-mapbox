@@ -6,9 +6,17 @@
 }
 
 .latlng {
-    display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
+    margin: 12px;
+    background: grey;
+    color: white;
+    font-size: 12;
+    border-radius: 25px;
+    padding: 5px;
+    opacity: 0.7;
+
     /* mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold" */
 }

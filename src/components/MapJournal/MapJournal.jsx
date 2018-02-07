@@ -41,15 +41,15 @@ class MapJournal extends Component {
             position: 'absolute',
             top: '15%',
             bottom: '1.5%',
-            width: '99%'
+            width: '99%',
         };
 
         return (
             <div className='container'>
-                <div className='latlng'>
-                    <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-                </div>
                 <div ref={el => this.mapContainer = el} style={style}>
+                    <div className='latlng'>
+                        <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+                    </div>
                 </div>
             </div>
         )
