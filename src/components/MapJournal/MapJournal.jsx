@@ -33,7 +33,16 @@ class MapJournal extends Component {
                 zoom: map.getZoom().toFixed(2)
             })
         })
+
+        map.on('click', () => {
+            console.log('clicked')
+        })
+
+        map.on('dblclick', () => {
+            console.log('dblClicked')
+        })
     }
+    
     render () {
         const { lng, lat, zoom } = this.state;
 
