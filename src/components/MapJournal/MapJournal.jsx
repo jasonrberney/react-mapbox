@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { container, latlng } from './styles.css'
+import { stringify } from 'querystring';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
 
@@ -34,8 +35,14 @@ class MapJournal extends Component {
             })
         })
 
-        map.on('click', () => {
-            console.log('clicked')
+        map.on('click', (e) => {
+
+            this.setState({
+                lng: e.lngLat.lng,
+                lat: e.lngLat.lat,
+            })
+
+            console.log(`clicked ${this.state.lng}, ${this.state.lat}`)
         })
 
         map.on('dblclick', () => {
