@@ -11,7 +11,8 @@ class MapJournal extends Component {
         this.state = {
             lng: 5, 
             lat: 34,
-            zoom: 1.5
+            zoom: 1.5,
+            basemap: 'streets'
         }
     }
 
@@ -20,7 +21,7 @@ class MapJournal extends Component {
 
         const map = new mapboxgl.Map({
             container: this.mapContainer,
-            style: 'mapbox://styles/mapbox/streets-v9',
+            style: `mapbox://styles/mapbox/${this.state.basemap}-v9`,
             center: [lng, lat],
             zoom
         });
