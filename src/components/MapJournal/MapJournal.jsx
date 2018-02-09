@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { container, latlng } from './styles.css'
 import { stringify } from 'querystring';
+import BasemapSelector from './BasemapSelector.jsx'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
 
@@ -67,6 +68,7 @@ class MapJournal extends Component {
                     <div className='latlng'>
                         <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
                     </div>
+                    <BasemapSelector basemap={this.state.basemap}/>
                 </div>
             </div>
         )

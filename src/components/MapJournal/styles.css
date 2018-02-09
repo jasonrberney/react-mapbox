@@ -20,3 +20,10 @@
 
     /* mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold" */
 }
+
+.basemap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}

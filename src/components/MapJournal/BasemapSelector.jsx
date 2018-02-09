@@ -1,24 +1,32 @@
 import React, { Component } from 'react'
+import { basemap } from './styles.css'
 
 class BasemapSelector extends Component {
-    contructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
-            props
+            basemap: props.basemap
         }
+        debugger;
+        this._onChange = this._onChange.bind(this);
     }
 
-    render (){
+    _onChange (e) {
+        debugger;
+        this.setState({basemap: e.currentTarget.name})
+    }
+
+    render () {
         return (
-            <div>
+            <div className='basemap'>
                 <ul>
                     <li>
-                        <input type="checkbox" name="streets-v9" checked={} onChange={this._onChange} />
+                        <input type="radio" name="streets" checked={'streets' === this.state.basemap} onChange={this._onChange} />
                         <label>streets</label>
                     </li>
                     <li>
-                        <input type="checkbox" name="dark" checked={} onChange={this._onChange} />
-                        <label>streets</label>
+                        <input type="radio" name="dark" checked={'dark' === this.state.basemap} onChange={this._onChange} />
+                        <label>dark</label>
                     </li>
                 </ul>
             </div>
