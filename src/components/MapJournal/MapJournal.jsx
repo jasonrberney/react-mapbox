@@ -10,11 +10,14 @@ class MapJournal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            map: null,
             lng: 5, 
             lat: 34,
             zoom: 1.5,
             basemap: 'streets'
         }
+
+        this._changeBasemap = this._changeBasemap.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +29,8 @@ class MapJournal extends Component {
             center: [lng, lat],
             zoom
         });
+
+        this.setState({map: map})
 
         map.on('move', () => {
             const { lng, lat } = map.getCenter();
@@ -51,6 +56,11 @@ class MapJournal extends Component {
             console.log('dblClicked')
         })
     }
+
+    _changeBasemap(basemapValue) {
+        this.state.map.setStyle(`mapbox://styles/mapbox/${basemapValue}-v9`);
+        //this.setState({basemap: basemapValue})
+    }
     
     render () {
         const { lng, lat, zoom } = this.state;
@@ -68,7 +78,7 @@ class MapJournal extends Component {
                     <div className='latlng'>
                         <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
                     </div>
-                    <BasemapSelector basemap={this.state.basemap}/>
+                    <BasemapSelector basemap={this.state.basemap} changeBasemap={this._changeBasemap}/>
                 </div>
             </div>
         )

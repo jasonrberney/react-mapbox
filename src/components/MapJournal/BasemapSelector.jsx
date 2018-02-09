@@ -7,13 +7,13 @@ class BasemapSelector extends Component {
         this.state = {
             basemap: props.basemap
         }
-        debugger;
+
         this._onChange = this._onChange.bind(this);
     }
 
     _onChange (e) {
-        debugger;
         this.setState({basemap: e.currentTarget.name})
+        this.props.changeBasemap(e.currentTarget.name);
     }
 
     render () {
