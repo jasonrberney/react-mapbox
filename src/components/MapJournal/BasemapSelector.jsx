@@ -28,6 +28,14 @@ class BasemapSelector extends Component {
                         <input type="radio" name="dark" checked={'dark' === this.state.basemap} onChange={this._onChange} />
                         <label>dark</label>
                     </li>
+                    <li>
+                        <input type="radio" name="satellite" checked={'satellite' === this.state.basemap} onChange={this._onChange} />
+                        <label>satellite</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="light" checked={'light' === this.state.basemap} onChange={this._onChange} />
+                        <label>light</label>
+                    </li>
                 </ul>
             </div>
         )
