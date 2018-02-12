@@ -16,29 +16,31 @@ export function setMapboxMap (mapboxMap) {
     }
 }
 
-export function CHANGE_LAT_LNG_ZOOM () {
+export function changeLatLngZoom () {
     return {
         type: CHANGE_LAT_LNG_ZOOM
     }
 }
 
 export default function mapboxMap (state = initialMapState, action) {
-    debugger;
     switch(action.type) {
         case SET_MAPBOX_MAP:
-            return {
-                ...state,
-                map: {
-                    ...state.map,
-                    ...action.map
+            return [
+                ...state, 
+                { 
+                    map: action.map
                 }
-            }
+            ]
         case CHANGE_LAT_LNG_ZOOM:
-            return {
-                ...state,
-                lat: action.lat,
-                lng: action.lng,
-                zoom: action.zoom
-            }
+            return [
+                ...state, 
+                {
+                    lat: action.lat,
+                    lng: action.lng,
+                    zoom: action.zoom,
+                }
+            ]
+        default:
+            return state
     }
 }
