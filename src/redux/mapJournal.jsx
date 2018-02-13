@@ -16,9 +16,12 @@ export function setMapboxMap (mapboxMap) {
     }
 }
 
-export function changeLatLngZoom () {
+export function changeLatLngZoom (lat, lng, zoom) {
     return {
-        type: CHANGE_LAT_LNG_ZOOM
+        type: CHANGE_LAT_LNG_ZOOM,
+        lat,
+        lng,
+        zoom
     }
 }
 
