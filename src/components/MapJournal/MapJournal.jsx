@@ -64,6 +64,7 @@ class MapJournal extends Component {
         map.on('dblclick', () => {
             console.log('dblClicked')
         })
+        //debugger;
     }
 
     _changeBasemap(basemapValue) {
@@ -72,7 +73,7 @@ class MapJournal extends Component {
     }
     
     render () {
-        const { lng, lat, zoom } = this.props.data;
+        //let { lng, lat, zoom } = this.props.data;
 
         const style = {
             position: 'absolute',
@@ -80,12 +81,12 @@ class MapJournal extends Component {
             bottom: '1.5%',
             width: '99%',
         };
-
+        //debugger;
         return (
             <div className='container'>
                 <div ref={el => this.mapContainer = el} style={style}>
                     <div className='latlng'>
-                        <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+                        <div>{`Longitude: ${this.props.data.lng} Latitude: ${this.props.data.lat} Zoom: ${this.props.data.zoom}`}</div>
                     </div>
                     <BasemapSelector basemap={this.props.data.basemap} changeBasemap={this._changeBasemap}/>
                 </div>

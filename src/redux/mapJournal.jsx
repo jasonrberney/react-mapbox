@@ -28,21 +28,15 @@ export function changeLatLngZoom (lat, lng, zoom) {
 export default function mapboxMap (state = initialMapState, action) {
     switch(action.type) {
         case SET_MAPBOX_MAP:
-            return [
-                ...state, 
-                { 
-                    map: action.map
-                }
-            ]
+            return Object.assign({}, state, {
+                map: action.map
+            })
         case CHANGE_LAT_LNG_ZOOM:
-            return [
-                ...state, 
-                {
-                    lat: action.lat,
-                    lng: action.lng,
-                    zoom: action.zoom,
-                }
-            ]
+            return Object.assign({}, state, {
+                lat: action.lat,
+                lng: action.lng,
+                zoom: action.zoom,
+            })
         default:
             return state
     }
