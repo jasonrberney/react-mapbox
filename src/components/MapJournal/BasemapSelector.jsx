@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { dispatch } from 'redux'
 import { basemap } from './styles.css'
 
 class BasemapSelector extends Component {
@@ -42,4 +44,10 @@ class BasemapSelector extends Component {
     }
 }
 
-export default BasemapSelector
+function mapStateToProps(state) {
+    return {
+        data: state
+    }
+}
+
+export default connect(mapStateToProps)(BasemapSelector)
