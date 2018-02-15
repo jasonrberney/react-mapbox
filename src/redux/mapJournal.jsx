@@ -3,7 +3,7 @@ const SET_MAPBOX_MAP = 'SET_MAPBOX_MAP';
 const CHANGE_BASEMAP = 'CHANGE_BASEMAP';
 
 const initialMapState = {
-    map: null,
+    mapboxMap: null,
     lng: 5, 
     lat: 34,
     zoom: 1.5,
@@ -37,7 +37,7 @@ export default function mapboxMap (state = initialMapState, action) {
     switch(action.type) {
         case SET_MAPBOX_MAP:
             return Object.assign({}, state, {
-                map: action.map
+                mapboxMap: action.mapboxMap
             })
         case CHANGE_LAT_LNG_ZOOM:
             return Object.assign({}, state, {
@@ -46,8 +46,11 @@ export default function mapboxMap (state = initialMapState, action) {
                 zoom: action.zoom,
             })
         case CHANGE_BASEMAP:
+            let newMap = state.mapboxMap
+            newMap.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`);
+
             return Object.assign({}, state, {
-                map: state.map.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`),
+                mapboxMap: newMap,
                 basemap: action.basemap
             })
         default:

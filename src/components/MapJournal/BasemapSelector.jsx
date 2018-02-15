@@ -7,20 +7,13 @@ import { basemap } from './styles.css'
 class BasemapSelector extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     basemap: props.basemap
-        // }
 
         this._onChange = this._onChange.bind(this);
     }
 
     _onChange (e) {
-        debugger;
         this.props.dispatch(changeBasemap(e.currentTarget.name))
-        //this.props.data.map.setStyle(`mapbox://styles/mapbox/${e.currentTarget.name}-v9`)
-        debugger;
-        //this.setState({basemap: e.currentTarget.name})
-        //this.props.changeBasemap(e.currentTarget.name);
+
     }
 
     render () {
