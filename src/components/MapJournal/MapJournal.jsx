@@ -88,7 +88,7 @@ class MapJournal extends Component {
                     <div className='latlng'>
                         <div>{`Longitude: ${this.props.data.lng} Latitude: ${this.props.data.lat} Zoom: ${this.props.data.zoom}`}</div>
                     </div>
-                    <BasemapSelector basemap={this.props.data.basemap} changeBasemap={this._changeBasemap}/>
+                    <BasemapSelector />
                 </div>
             </div>
         )
