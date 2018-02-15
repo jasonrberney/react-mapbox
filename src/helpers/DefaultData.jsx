@@ -3,12 +3,43 @@ const DefaultData = {
     "features": [
         {
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "title": "Seattle",
+                "marker-symbol": "marker-15"
+            },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    -76.53063297271729,
-                    39.18174077994108
+                    -122.3321,
+                    47.6062
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Paris",
+                "marker-symbol": "marker-15"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.3522,
+                    48.8566
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Bali",
+                "marker-symbol": "marker-15"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.188919,
+                    -8.409518
                 ]
             }
         }
