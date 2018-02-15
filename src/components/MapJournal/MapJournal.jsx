@@ -5,6 +5,7 @@ import { stringify } from 'querystring';
 import BasemapSelector from './BasemapSelector.jsx'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
+import DefaultData from '../../helpers/DefaultData.jsx'
 import { setMapboxMap, changeLatLngZoom } from '../../redux/mapJournal.jsx'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
@@ -43,6 +44,12 @@ class MapJournal extends Component {
 
         mapboxMap.on('dblclick', () => {
             console.log('dblClicked')
+        })
+
+        mapboxMap.on('load', () => {
+            debugger;
+            mapboxMap.addLayer({"id": "points", "type": "circle", "source": {"type": "geojson", "data": DefaultData}
+            })
         })
     }
     
