@@ -18,7 +18,7 @@ class BasemapSelector extends Component {
 
     render () {
         return (
-            <div className='basemap'>
+            <div className='basemapContainer'>
                 <ul>
                     <li>
                         <input type="radio" name="streets" checked={'streets' === this.props.data.basemap} onChange={this._onChange} />

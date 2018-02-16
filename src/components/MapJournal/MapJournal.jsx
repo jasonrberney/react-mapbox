@@ -18,12 +18,36 @@ class MapJournal extends Component {
 
     componentDidMount() {
         const { lng, lat, zoom } = this.props.data;
+        let loggedIn = true;
 
         const mapboxMap = new mapboxgl.Map({
             container: this.mapContainer,
             style: `mapbox://styles/mapbox/${this.props.data.basemap}-v8`,
             center: [lng, lat],
             zoom
+        });
+
+        mapboxMap.on('load', () => {
+            let mapData = loggedIn === true ? DefaultData : UserData
+            debugger;
+            mapboxMap.addSource('mapPoints', {
+                "type": "geojson", 
+                "data": mapData
+            });
+            mapboxMap.addLayer(
+                {
+                    "id": "defaultPoints", 
+                    "type": "symbol", 
+                    "source": "mapPoints", 
+                    "layout": {
+                        "icon-image": "{marker-symbol}", 
+                        "text-field": "{title}", 
+                        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"], 
+                        "text-offset": [0, 0.6], 
+                        "text-anchor": "top"
+                    }
+                }
+            );
         });
 
         this.props.dispatch(setMapboxMap(mapboxMap))
@@ -46,27 +70,6 @@ class MapJournal extends Component {
             console.log('dblClicked')
         })
 
-        mapboxMap.on('load', (e) => {
-            debugger;
-            mapboxMap.addLayer(
-                {
-                    "id": "defaultPoints", 
-                    "type": "symbol", 
-                    "source": {
-                        "type": "geojson", 
-                        "data": DefaultData
-                    }, 
-                    "layout": {
-                        "icon-image": "{marker-symbol}", 
-                        "text-field": "{title}", 
-                        "text-font": ["Open Sans Semibold", 
-                        "Arial Unicode MS Bold"], 
-                        "text-offset": [0, 0.6], 
-                        "text-anchor": "top"
-                    }
-                }
-            )
-        })
     }
     
     render () {

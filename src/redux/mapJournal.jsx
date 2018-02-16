@@ -46,6 +46,7 @@ export default function mapboxMap (state = initialMapState, action) {
                 zoom: action.zoom,
             })
         case CHANGE_BASEMAP:
+
             let newMap = state.mapboxMap
             newMap.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`);
 
