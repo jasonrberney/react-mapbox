@@ -6,7 +6,8 @@ import BasemapSelector from './BasemapSelector.jsx'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
 import DefaultData from '../../helpers/DefaultData.jsx'
-import { setMapboxMap, changeLatLngZoom } from '../../redux/mapJournal.jsx'
+import { setMapboxMap, changeLatLngZoom, addDefaultMapData } from '../../redux/mapJournal.jsx'
+//import { addDefaultMapData } from '../../redux/mapData.jsx'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
 
@@ -28,18 +29,23 @@ class MapJournal extends Component {
         });
 
         mapboxMap.on('load', () => {
-            let mapData = loggedIn === true ? DefaultData : UserData
+            let initialMapData = loggedIn === true ? DefaultData : UserData
             debugger;
+            this.props.dispatch(addDefaultMapData(initialMapData))
+ 
             mapboxMap.addSource('mapPoints', {
-                "type": "geojson", 
-                "data": mapData
+                type: "geojson", 
+                data: {
+                    type: "FeatureCollection",
+                    features: this.props.data.mapboxDataFeatures
+                }
             });
             mapboxMap.addLayer(
                 {
-                    "id": "defaultPoints", 
-                    "type": "symbol", 
-                    "source": "mapPoints", 
-                    "layout": {
+                    id: "defaultPoints", 
+                    type: "symbol", 
+                    source: "mapPoints", 
+                    layout: {
                         "icon-image": "{marker-symbol}", 
                         "text-field": "{title}", 
                         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"], 
