@@ -6,8 +6,8 @@ import BasemapSelector from './BasemapSelector.jsx'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
 import DefaultData from '../../helpers/DefaultData.jsx'
-import { setMapboxMap, changeLatLngZoom, addDefaultMapData } from '../../redux/mapJournal.jsx'
-//import { addDefaultMapData } from '../../redux/mapData.jsx'
+import { setMapboxMap, changeLatLngZoom } from '../../redux/mapboxMapInfo.jsx'
+import { addDefaultMapData } from '../../redux/mapData.jsx'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
 
@@ -18,12 +18,12 @@ class MapJournal extends Component {
     }
 
     componentDidMount() {
-        const { lng, lat, zoom } = this.props.data;
+        const { lng, lat, zoom } = this.props.mapInfo;
         let loggedIn = true;
 
         const mapboxMap = new mapboxgl.Map({
             container: this.mapContainer,
-            style: `mapbox://styles/mapbox/${this.props.data.basemap}-v8`,
+            style: `mapbox://styles/mapbox/${this.props.mapInfo.basemap}-v8`,
             center: [lng, lat],
             zoom
         });
@@ -69,7 +69,7 @@ class MapJournal extends Component {
         })
 
         mapboxMap.on('click', (e) => {
-            console.log(`clicked ${this.props.data.lng}, ${this.props.data.lat}`)
+            console.log(`clicked ${this.props.mapInfo.lng}, ${this.props.mapInfo.lat}`)
         })
 
         mapboxMap.on('dblclick', () => {
@@ -90,7 +90,7 @@ class MapJournal extends Component {
             <div className='container'>
                 <div ref={el => this.mapContainer = el} style={style}>
                     <div className='latlng'>
-                        <div>{`Longitude: ${this.props.data.lng} Latitude: ${this.props.data.lat} Zoom: ${this.props.data.zoom}`}</div>
+                        <div>{`Longitude: ${this.props.mapInfo.lng} Latitude: ${this.props.mapInfo.lat} Zoom: ${this.props.mapInfo.zoom}`}</div>
                     </div>
                     <BasemapSelector />
                 </div>
@@ -101,7 +101,8 @@ class MapJournal extends Component {
 
 function mapStateToProps(state) {
     return {
-        data: state
+        mapInfo: state.mapboxMapInfo,
+        data: state.mapData
     }
 }
 

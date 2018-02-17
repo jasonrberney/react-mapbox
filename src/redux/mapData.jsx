@@ -5,10 +5,10 @@ const initialMapDataState = {
     mapboxDataFeatures: []
 }
 
-export function addDefaultMapData(mapPoint) {
+export function addDefaultMapData(mapPointData) {
     return {
         type: ADD_MAP_DATA,
-        mapPoint
+        mapPointData
     }
 }
 
@@ -16,23 +16,7 @@ export default function mapData (state = initialMapDataState, action) {
     switch(action.type) {
         case ADD_MAP_DATA:
             return Object.assign({}, state, {
-                mapboxDataFeatures: [
-                    ...state.mapboxDataFeatures,
-                    {
-                        "type": "Feature",
-                        "properties": {
-                            "title": action.mapPoint.properties.title,
-                            "marker-symbol": "marker-15"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                action.mapPoint.geometry.coordinates[0],
-                                action.mapPoint.geometry.coordinates[1]
-                            ]
-                        }
-                    }
-                ]               
+                mapboxDataFeatures: action.mapPointData 
             })
         default: 
             return state             

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { changeBasemap } from '../../redux/mapJournal.jsx'
+import { changeBasemap } from '../../redux/mapboxMapInfo.jsx'
 import { basemap } from './styles.css'
 
 class BasemapSelector extends Component {

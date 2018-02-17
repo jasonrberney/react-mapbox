@@ -2,23 +2,12 @@ const CHANGE_LAT_LNG_ZOOM = 'CHANGE_LAT_LNG_ZOOM';
 const SET_MAPBOX_MAP = 'SET_MAPBOX_MAP';
 const CHANGE_BASEMAP = 'CHANGE_BASEMAP';
 
-const ADD_MAP_DATA = 'ADD_MAP_DATA';
-
-
 const initialMapState = {
     mapboxMap: null,
     lng: 5, 
     lat: 34,
     zoom: 1.5,
     basemap: 'streets',
-    mapboxDataFeatures: []
-}
-
-export function addDefaultMapData(mapPointData) {
-    return {
-        type: ADD_MAP_DATA,
-        mapPointData
-    }
 }
 
 export function setMapboxMap (mapboxMap) {
@@ -64,11 +53,6 @@ export default function mapboxMapInfo (state = initialMapState, action) {
             return Object.assign({}, state, {
                 mapboxMap: newMap,
                 basemap: action.basemap
-            })
-        case ADD_MAP_DATA:
-        debugger;
-            return Object.assign({}, state, {
-                mapboxDataFeatures: action.mapPointData          
             })
         default:
             return state
