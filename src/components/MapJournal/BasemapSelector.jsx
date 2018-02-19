@@ -21,19 +21,19 @@ class BasemapSelector extends Component {
             <div className='basemapContainer'>
                 <ul>
                     <li>
-                        <input type="radio" name="streets" checked={'streets' === this.props.data.basemap} onChange={this._onChange} />
+                        <input type="radio" name="streets" checked={'streets' === this.props.mapInfo.basemap} onChange={this._onChange} />
                         <label>streets</label>
                     </li>
                     <li>
-                        <input type="radio" name="dark" checked={'dark' === this.props.data.basemap} onChange={this._onChange} />
+                        <input type="radio" name="dark" checked={'dark' === this.props.mapInfo.basemap} onChange={this._onChange} />
                         <label>dark</label>
                     </li>
                     <li>
-                        <input type="radio" name="satellite" checked={'satellite' === this.props.data.basemap} onChange={this._onChange} />
+                        <input type="radio" name="satellite" checked={'satellite' === this.props.mapInfo.basemap} onChange={this._onChange} />
                         <label>satellite</label>
                     </li>
                     <li>
-                        <input type="radio" name="light" checked={'light' === this.props.data.basemap} onChange={this._onChange} />
+                        <input type="radio" name="light" checked={'light' === this.props.mapInfo.basemap} onChange={this._onChange} />
                         <label>light</label>
                     </li>
                 </ul>
@@ -44,7 +44,7 @@ class BasemapSelector extends Component {
 
 function mapStateToProps(state) {
     return {
-        data: state
+        mapInfo: state.mapboxMapInfo
     }
 }
 

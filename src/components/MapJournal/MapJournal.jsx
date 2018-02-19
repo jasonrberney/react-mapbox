@@ -30,10 +30,10 @@ class MapJournal extends Component {
 
         mapboxMap.on('load', () => {
             let initialMapData = loggedIn === true ? DefaultData : UserData
-            debugger;
+
             this.props.dispatch(addDefaultMapData(initialMapData))
  
-            mapboxMap.addSource('mapPoints', {
+            mapboxMap.addSource('mapPointsSource', {
                 type: "geojson", 
                 data: {
                     type: "FeatureCollection",
@@ -42,9 +42,9 @@ class MapJournal extends Component {
             });
             mapboxMap.addLayer(
                 {
-                    id: "defaultPoints", 
+                    id: "mapPointsLayer", 
                     type: "symbol", 
-                    source: "mapPoints", 
+                    source: "mapPointsSource", 
                     layout: {
                         "icon-image": "{marker-symbol}", 
                         "text-field": "{title}", 
@@ -68,8 +68,24 @@ class MapJournal extends Component {
             this.props.dispatch(changeLatLngZoom(lati, long, zoom))
         })
 
-        mapboxMap.on('click', (e) => {
-            console.log(`clicked ${this.props.mapInfo.lng}, ${this.props.mapInfo.lat}`)
+        mapboxMap.on('click', 'mapPointsLayer', (e) => {
+            // When a click event occurs on a feature in the mapPointsLayer layer, open a popup at the
+            // location of the feature, with description HTML from its properties.
+            let coordinates = e.features[0].geometry.coordinates.slice();
+            let description = e.features[0].properties.title;
+
+            // Ensure that if the map is zoomed out such that multiple copies of the feature are visible,
+            // the popup appears over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(this.props.mapInfo.mapboxMap)
+
+            //console.log(`clicked ${this.props.mapInfo.lng}, ${this.props.mapInfo.lat}`)
         })
 
         mapboxMap.on('dblclick', () => {
