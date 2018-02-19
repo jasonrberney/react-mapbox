@@ -3,6 +3,7 @@ const DefaultData =  [
         type: 'Feature',
         properties: {
             title: 'Seattle',
+            experience: 'This is an example of an experience I had in this city.',
             'marker-symbol': 'marker-15'
         },
         geometry: {
@@ -17,6 +18,7 @@ const DefaultData =  [
         type: 'Feature',
         properties: {
             title: 'Paris',
+            experience: 'This is an example of an experience I had in this city.',            
             'marker-symbol': 'marker-15'
         },
         geometry: {
@@ -31,6 +33,7 @@ const DefaultData =  [
         type: 'Feature',
         properties: {
             title: 'Bali',
+            experience: 'This is an example of an experience I had in this city.',            
             'marker-symbol': 'marker-15'
         },
         geometry: {

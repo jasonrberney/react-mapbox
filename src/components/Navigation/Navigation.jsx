@@ -14,6 +14,9 @@ class Navigation extends Component {
                         <li>
                             <NavLink exact className='link' activeClassName='active' to='/mapjournal'>{'Map Journal'}</NavLink>
                         </li>
+                        <li>
+                            <button className='link'>{'Add A Trip'}</button>
+                        </li>
                     </ul>
                 </nav>
             </div>

@@ -72,7 +72,8 @@ class MapJournal extends Component {
             // When a click event occurs on a feature in the mapPointsLayer layer, open a popup at the
             // location of the feature, with description HTML from its properties.
             let coordinates = e.features[0].geometry.coordinates.slice();
-            let description = e.features[0].properties.title;
+            let title = e.features[0].properties.title;
+            let experience = e.features[0].properties.experience;            
 
             // Ensure that if the map is zoomed out such that multiple copies of the feature are visible,
             // the popup appears over the copy being pointed to.
@@ -82,11 +83,21 @@ class MapJournal extends Component {
 
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
-                .setHTML(description)
+                .setHTML(`<strong>${title}</strong><p>${experience}</p>`)
                 .addTo(this.props.mapInfo.mapboxMap)
 
             //console.log(`clicked ${this.props.mapInfo.lng}, ${this.props.mapInfo.lat}`)
         })
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        mapboxMap.on('mouseenter', 'mapPointsLayer', () => {
+            mapboxMap.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        mapboxMap.on('mouseleave', 'mapPointsLayer', () => {
+            mapboxMap.getCanvas().style.cursor = '';
+        });
 
         mapboxMap.on('dblclick', () => {
             console.log('dblClicked')
