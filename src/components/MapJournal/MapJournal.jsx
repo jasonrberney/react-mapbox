@@ -103,6 +103,52 @@ class MapJournal extends Component {
             console.log('dblClicked')
         })
 
+        // ADDING NEW POINT
+        // Holds mousedown state for events. if this flag is active, we move the point on `mousemove`.
+        let isDragging;
+        
+        // Is the cursor over a point? if this flag is active, we listen for a mousedown event.
+        let isCursorOverPoint;
+
+        let canvas = mapboxMap.getCanvasContainer();
+        
+        function mouseDown() {
+            if (!isCursorOverPoint) return;
+        
+            isDragging = true;
+        
+            // Set a cursor indicator
+            canvas.style.cursor = 'grab';
+        
+            // Mouse events
+            mapboxMap.on('mousemove', onMove);
+            mapboxMap.once('mouseup', onUp);
+        }
+        
+        function onMove(e) {
+            if (!isDragging) return;
+            var coords = e.lngLat;
+        
+            // Set a UI indicator for dragging.
+            canvas.style.cursor = 'grabbing';
+        
+            // Update the Point feature in `geojson` coordinates
+            // and call setData to the source layer `point` on it.
+            //geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+            mapboxMap.getSource('point').setData(geojson);
+        }
+        
+        function onUp(e) {
+            if (!isDragging) return;
+            var coords = e.lngLat;
+        
+            console.log(coords)
+            canvas.style.cursor = '';
+            isDragging = false;
+        
+            // Unbind mouse events
+            mapboxMap.off('mousemove', onMove);
+        }
     }
     
     render () {
