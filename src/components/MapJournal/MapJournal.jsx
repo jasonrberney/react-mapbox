@@ -19,6 +19,7 @@ class MapJournal extends Component {
 
     componentDidMount() {
         const { lng, lat, zoom } = this.props.mapInfo;
+
         let loggedIn = true;
 
         const mapboxMap = new mapboxgl.Map({
@@ -32,7 +33,7 @@ class MapJournal extends Component {
             let initialMapData = loggedIn === true ? DefaultData : UserData
 
             this.props.dispatch(addDefaultMapData(initialMapData))
- 
+
             mapboxMap.addSource('mapPointsSource', {
                 type: "geojson", 
                 data: {
@@ -54,6 +55,21 @@ class MapJournal extends Component {
                     }
                 }
             );
+            // mapboxMap.on('mousemove', (e) => {
+            //     //debugger;
+            //     //if (!isDragging) return;
+            //     var coords = e.lngLat;
+            
+            //     // Set a UI indicator for dragging.
+            //     canvas.style.cursor = 'grabbing';
+            
+            //     // Update the Point feature in `geojson` coordinates
+            //     // and call setData to the source layer `point` on it.
+            //     let moveMapPoint = this.props.data.mapboxNewPoint;
+            //     moveMapPoint[0].geometry.coordinates = [coords.lng, coords.lat];
+
+            //     mapboxMap.getSource('newPointSource').setData(moveMapPoint[0]);
+            // })
         });
 
         this.props.dispatch(setMapboxMap(mapboxMap))
@@ -91,11 +107,23 @@ class MapJournal extends Component {
 
         // Change the cursor to a pointer when the mouse is over the places layer.
         mapboxMap.on('mouseenter', 'mapPointsLayer', () => {
+            isCursorOverPoint = true;
             mapboxMap.getCanvas().style.cursor = 'pointer';
         });
-
         // Change it back to a pointer when it leaves.
         mapboxMap.on('mouseleave', 'mapPointsLayer', () => {
+            isCursorOverPoint = false;
+            mapboxMap.getCanvas().style.cursor = '';
+        });
+
+        // Change the cursor to a pointer when the mouse is over the new point layer.
+        mapboxMap.on('mouseenter', 'newPointLayer', () => {
+            isCursorOverPoint = true;
+            mapboxMap.getCanvas().style.cursor = 'pointer';
+        });
+        // Change it back to a pointer when it leaves.
+        mapboxMap.on('mouseleave', 'newPointLayer', () => {
+            isCursorOverPoint = false;
             mapboxMap.getCanvas().style.cursor = '';
         });
 
@@ -105,38 +133,60 @@ class MapJournal extends Component {
 
         // ADDING NEW POINT
         // Holds mousedown state for events. if this flag is active, we move the point on `mousemove`.
-        let isDragging;
+        let isDragging = false
         
         // Is the cursor over a point? if this flag is active, we listen for a mousedown event.
-        let isCursorOverPoint;
+        let isCursorOverPoint = false;
 
         let canvas = mapboxMap.getCanvasContainer();
-        
-        function mouseDown() {
+
+        mapboxMap.on('mousedown', () => {
+            //debugger;
+
             if (!isCursorOverPoint) return;
         
             isDragging = true;
-        
+            //debugger;
             // Set a cursor indicator
             canvas.style.cursor = 'grab';
         
             // Mouse events
-            mapboxMap.on('mousemove', onMove);
+            mapboxMap.on('mousemove', (e) => {
+                //debugger;
+                //if (!isDragging) return;
+                var coords = e.lngLat;
+            
+                // Set a UI indicator for dragging.
+                canvas.style.cursor = 'grabbing';
+            
+                // Update the Point feature in `geojson` coordinates
+                // and call setData to the source layer `point` on it.
+                let moveMapPoint = this.props.data.mapboxNewPoint;
+                moveMapPoint[0].geometry.coordinates = [coords.lng, coords.lat];
+    
+                mapboxMap.getSource('newPointSource').setData(moveMapPoint[0]);
+            });
+
             mapboxMap.once('mouseup', onUp);
-        }
+        })
+        //mapboxMap.on('mousemove', onMove);
+
+        //function onMove(e) {
+        // mapboxMap.on('mousemove', (e) => {
+        //     //debugger;
+        //     //if (!isDragging) return;
+        //     var coords = e.lngLat;
         
-        function onMove(e) {
-            if (!isDragging) return;
-            var coords = e.lngLat;
+        //     // Set a UI indicator for dragging.
+        //     canvas.style.cursor = 'grabbing';
         
-            // Set a UI indicator for dragging.
-            canvas.style.cursor = 'grabbing';
-        
-            // Update the Point feature in `geojson` coordinates
-            // and call setData to the source layer `point` on it.
-            //geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
-            mapboxMap.getSource('point').setData(geojson);
-        }
+        //     // Update the Point feature in `geojson` coordinates
+        //     // and call setData to the source layer `point` on it.
+        //     let moveMapPoint = this.props.data.mapboxNewPoint;
+        //     moveMapPoint[0].geometry.coordinates = [coords.lng, coords.lat];
+
+        //     mapboxMap.getSource('newPointSource').setData(moveMapPoint[0]);
+        // })
         
         function onUp(e) {
             if (!isDragging) return;
@@ -147,7 +197,7 @@ class MapJournal extends Component {
             isDragging = false;
         
             // Unbind mouse events
-            mapboxMap.off('mousemove', onMove);
+            mapboxMap.off('mousemove');
         }
     }
     

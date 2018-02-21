@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { NavLinke, NavLink } from 'react-router-dom'
-import { MapAddTrip } from '../MapAddTrip/MapAddTrip.jsx'
+import MapAddTrip from '../MapAddTrip/MapAddTrip.jsx'
 import { navContainer, link, active, container } from './styles.css'
 
 class Navigation extends Component {
     render () {
+        const currentPath = window.location.pathname
         return (
             <div className='container'>
                 <nav className='navContainer'>
@@ -16,9 +17,15 @@ class Navigation extends Component {
                             <NavLink exact className='link' activeClassName='active' to='/mapjournal'>{'Map Journal'}</NavLink>
                         </li>
                         <li>
-                            <button className='link' >{'Add A Trip'}</button>
+                            {currentPath.includes('mapjournal')
+                                ? <MapAddTrip />
+                                : null 
+                            }
+                            {/* <MapAddTrip /> */}
+                            {/* <button className='link' >{'Add A Trip'}</button> */}
                         </li>
                     </ul>
+                    
                 </nav>
             </div>
         )
