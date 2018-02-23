@@ -19,37 +19,7 @@ class MapJournal extends Component {
     constructor(props) {
         super(props);
 
-        //this.onMove = this.onMove.bind(this);
-        //this.onUp = this.onUp.bind(this);
     }
-
-    // onMove(e, isDragging) {
-    // //mapboxMap.on('mousemove', (e) => {
-    //     //debugger;
-    //     if (!isDragging) return;
-    //     var coords = e.lngLat;
-    //     //debugger;
-    //     // Set a UI indicator for dragging.
-    //     //canvas.style.cursor = 'grabbing';
-    
-    //     // Update the Point feature in `geojson` coordinates
-    //     // and call setData to the source layer `point` on it.
-    //     let moveMapPoint = this.props.data.mapboxNewPoint;
-    //     moveMapPoint[0].geometry.coordinates = [coords.lng, coords.lat];
-
-    //     this.props.mapInfo.mapboxMap.getSource('newPointSource').setData(moveMapPoint[0]);
-    // }
-    // onUp(e, isDragging) {
-    //     if (!isDragging) return;
-    //     var coords = e.lngLat;
-    
-    //     console.log(coords)
-    //     //canvas.style.cursor = '';
-    //     isDragging = false;
-    
-    //     // Unbind mouse events
-    //     this.props.mapInfo.mapboxMap.off('mousemove');
-    // }
 
     componentDidMount() {
         const { lng, lat, zoom } = this.props.mapInfo;

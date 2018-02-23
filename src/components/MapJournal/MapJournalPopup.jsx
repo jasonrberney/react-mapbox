@@ -20,9 +20,7 @@ class MapJournalPopup extends Component {
         })
     }
 
-    render() { 
-        console.log(this.props.data.isEditing)
-        
+    render() {         
         return (
             <div>
                 {this.props.data.isEditing 

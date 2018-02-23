@@ -24,7 +24,9 @@ export function addNewMapPoint(newPoint) {
 }
 
 export function toggleEditing() {
-    type: TOGGLE_EDITING
+    return {
+        type: TOGGLE_EDITING
+    }
 }
 
 export default function mapData (state = initialMapDataState, action) {

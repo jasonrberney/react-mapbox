@@ -11,7 +11,7 @@ class ToggleEdit extends Component {
     }
 
     _onClick() {
-        this.props.dispatch(toggleEditing)
+        this.props.dispatch(toggleEditing())
     }
 
     render() {
