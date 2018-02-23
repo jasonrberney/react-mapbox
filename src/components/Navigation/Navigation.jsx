@@ -21,8 +21,6 @@ class Navigation extends Component {
                                 ? <MapAddTrip />
                                 : null 
                             }
-                            {/* <MapAddTrip /> */}
-                            {/* <button className='link' >{'Add A Trip'}</button> */}
                         </li>
                     </ul>
                     
