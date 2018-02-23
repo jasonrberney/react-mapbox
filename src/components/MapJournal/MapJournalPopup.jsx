@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
 //import { Popup } from 'react-mapbox-gl'
 
 
@@ -12,15 +13,32 @@ class MapJournalPopup extends Component {
 
     _onClick() {
         console.log('hello')
-        //this.props.mapInfo.mapboxMap;
+        this.props.mapInfo.mapboxMap.flyTo({
+            center: this.props.feature.geometry.coordinates.slice(),
+            zoom: 9,
+            speed: 0.6,
+        })
     }
 
-    render() {
+    render() { 
+        console.log(this.props.data.isEditing)
+        
         return (
             <div>
-                <h2>{this.props.feature.properties.title}</h2>
+                {this.props.data.isEditing 
+                    ? 
+                        <p>{'Soon to be form'}</p>
+                    : 
+                        <div>
+                            <h2>{this.props.feature.properties.title}</h2>
+                            <p>{this.props.feature.properties.experience}</p>
+                            <button onClick={this._onClick}>{'Fly Here'}</button>
+                            <ToggleEdit />
+                        </div>
+                }
+                {/* <h2>{this.props.feature.properties.title}</h2>
                 <p>{this.props.feature.properties.experience}</p>
-                <button onClick={this._onClick}>{'Fly Here'}</button>
+                <button onClick={this._onClick}>{'Fly Here'}</button> */}
             </div>
         )
     }
@@ -29,6 +47,7 @@ class MapJournalPopup extends Component {
 function mapStateToProps(state) {
     return {
         mapInfo: state.mapboxMapInfo,
+        data: state.mapData
     }
 }
 

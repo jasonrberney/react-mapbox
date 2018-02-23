@@ -122,7 +122,10 @@ class MapJournal extends Component {
                 //.setHTML(`${<MapJournalPopup />}`)
                 //.setHTML(myPopup(e.features[0]))
                 .addTo(this.props.mapInfo.mapboxMap)
-                .isOpen(ReactDOM.render(<Provider store={store}><MapJournalPopup feature={e.features[0]}/></Provider>, document.getElementById('popup')))
+                .isOpen(ReactDOM.render(<Provider store={store}>
+                                            <MapJournalPopup feature={e.features[0]}/>
+                                        </Provider>, 
+                                        document.getElementById('popup')))
 
             // setTimeout(() => {
             //     ReactDOM.render(<MapJournalPopup />, document.getElementById('popup'))

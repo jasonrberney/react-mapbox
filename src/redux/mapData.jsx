@@ -1,10 +1,12 @@
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
 //const ADD_USER_MAP_DATA = 'ADD_USER_MAP_DATA';
 const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
+const TOGGLE_EDITING = 'TOGGLE_EDITING';
 
 const initialMapDataState = {
     mapboxDataFeatures: [],
-    mapboxNewPoint: []
+    mapboxNewPoint: [],
+    isEditing: false,
 }
 
 export function addDefaultMapData(mapPointData) {
@@ -21,6 +23,10 @@ export function addNewMapPoint(newPoint) {
     }
 }
 
+export function toggleEditing() {
+    type: TOGGLE_EDITING
+}
+
 export default function mapData (state = initialMapDataState, action) {
     switch(action.type) {
         case ADD_MAP_DATA:
@@ -30,6 +36,10 @@ export default function mapData (state = initialMapDataState, action) {
         case ADD_NEW_MAP_POINT:
             return Object.assign({}, state, {
                 mapboxNewPoint: action.newPoint
+            })
+        case TOGGLE_EDITING:
+            return Object.assign({}, state, {
+                isEditing: true
             })
         default: 
             return state             

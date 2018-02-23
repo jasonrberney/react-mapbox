@@ -12,7 +12,13 @@ class MapAddTrip extends Component {
 
     _onClick() {
         let newPoint = [{
+            id: 4,
             type: "Feature",
+            properties: {
+                title: '',
+                experience: '',
+                'marker-symbol': 'marker-15'
+            },
             geometry: {
                 "type": "Point",
                 "coordinates": [this.props.mapInfo.lng, this.props.mapInfo.lat]
