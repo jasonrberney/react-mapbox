@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
+import MapTripForm from '../MapTripForm/MapTripForm.jsx'
 //import { Popup } from 'react-mapbox-gl'
 
 
@@ -25,7 +26,9 @@ class MapJournalPopup extends Component {
             <div>
                 {this.props.data.isEditing 
                     ? 
-                        <p>{'Soon to be form'}</p>
+                        <div>
+                            <MapTripForm feature={this.props.feature}/>
+                        </div>
                     : 
                         <div>
                             <h2>{this.props.feature.properties.title}</h2>
@@ -34,9 +37,6 @@ class MapJournalPopup extends Component {
                             <ToggleEdit />
                         </div>
                 }
-                {/* <h2>{this.props.feature.properties.title}</h2>
-                <p>{this.props.feature.properties.experience}</p>
-                <button onClick={this._onClick}>{'Fly Here'}</button> */}
             </div>
         )
     }

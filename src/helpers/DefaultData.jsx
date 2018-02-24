@@ -1,6 +1,6 @@
 const DefaultData =  [
     {
-        id: 1,
+        id: 0,
         type: 'Feature',
         properties: {
             title: 'Seattle',
@@ -16,7 +16,7 @@ const DefaultData =  [
         }
     },
     {
-        id: 2,
+        id: 1,
         type: 'Feature',
         properties: {
             title: 'Paris',
@@ -32,7 +32,7 @@ const DefaultData =  [
         }
     },
     {
-        id: 3,
+        id: 2,
         type: 'Feature',
         properties: {
             title: 'Bali',
