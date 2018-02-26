@@ -4,7 +4,6 @@ import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
 import MapTripForm from '../MapTripForm/MapTripForm.jsx'
 //import { Popup } from 'react-mapbox-gl'
 
-
 class MapJournalPopup extends Component {
     constructor(props) {
         super(props)
@@ -21,7 +20,14 @@ class MapJournalPopup extends Component {
         })
     }
 
-    render() {         
+    render() { 
+        let pointIndex = null;
+        for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
+            if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
+                pointIndex = i;
+            }
+        }
+
         return (
             <div>
                 {this.props.data.isEditing 
@@ -31,8 +37,8 @@ class MapJournalPopup extends Component {
                         </div>
                     : 
                         <div>
-                            <h2>{this.props.feature.properties.title}</h2>
-                            <p>{this.props.feature.properties.experience}</p>
+                            <h2>{this.props.data.mapboxDataFeatures[pointIndex].properties.title}</h2>
+                            <p>{this.props.data.mapboxDataFeatures[pointIndex].properties.experience}</p>
                             <button onClick={this._onClick}>{'Fly Here'}</button>
                             <ToggleEdit />
                         </div>

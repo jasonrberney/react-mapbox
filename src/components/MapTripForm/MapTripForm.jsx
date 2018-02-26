@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { updateMapPoints } from '../../redux/mapData.jsx'
+import { updateMapPoints, toggleEditing } from '../../redux/mapData.jsx'
+import { updateMapSource } from '../../redux/mapboxMapInfo.jsx'
 
 class MapTripForm extends Component {
     constructor(props) {
@@ -26,9 +27,6 @@ class MapTripForm extends Component {
         this.setState(Object.assign({}, this.state, {
             title: e.currentTarget.value
         }))
-        //this.props.data.mapboxDataFeatures.map()
-        //console.log(e.target.value)
-        //this.props.dispatch(updatePointTitle(this.props.feature.id, e.currentTarget.value))
     }
 
     _experienceChange(e) {
@@ -38,7 +36,6 @@ class MapTripForm extends Component {
     }
 
     _onSubmit(e) {
-        debugger;
         e.preventDefault()
         
         let updatedPoints = this.props.data.mapboxDataFeatures.map((point) => {
@@ -50,6 +47,9 @@ class MapTripForm extends Component {
         })
 
         this.props.dispatch(updateMapPoints(updatedPoints))
+        this.props.dispatch(updateMapSource(updatedPoints))
+        this.props.dispatch(toggleEditing())
+
     }
 
     render() {

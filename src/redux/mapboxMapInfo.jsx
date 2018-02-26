@@ -54,21 +54,25 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 zoom: action.zoom,
             })
         case CHANGE_BASEMAP:
-            let newMap = state.mapboxMap
-            newMap.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`);
+            //let newMap = state.mapboxMap
+            //let replaceSource = state.mapboxMap.getSource('mapPointsSource');
+            //let replaceLayer = state.mapboxMap.getLayer('mapPointsLayer');
+            //newMap.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`);
+            state.mapboxMap.setStyle(`mapbox://styles/mapbox/${action.basemap}-v9`);
+            
+            // newMap.on('load', () => {
+            //     newMap.addSource(replaceSource);
+            //     newMap.addLayer(replaceLayer);
+            // })
 
             return Object.assign({}, state, {
-                mapboxMap: newMap,
                 basemap: action.basemap
             })
         case UPDATE_MAP_SOURCE:
-        debugger;
-            state.mapboxMap.getSource('mapPointsSource').setData(action.points)
-            
-            // return Object.assign({}, state, {
-            //     mapboxMap: newMap,
-            //     basemap: action.basemap
-            // })
+            state.mapboxMap.getSource('mapPointsSource').setData({
+                type: "FeatureCollection",
+                features: action.points
+            })
         default:
             return state
     }

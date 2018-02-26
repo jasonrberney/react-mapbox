@@ -56,7 +56,7 @@ export default function mapData (state = initialMapDataState, action) {
             })
         case TOGGLE_EDITING:
             return Object.assign({}, state, {
-                isEditing: true
+                isEditing: !state.isEditing
             })
         default: 
             return state             
