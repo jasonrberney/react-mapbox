@@ -7,6 +7,7 @@ const TOGGLE_EDITING = 'TOGGLE_EDITING';
 const initialMapDataState = {
     mapboxDataFeatures: [],
     mapboxNewPoint: [],
+    isAdding: false,
     isEditing: false,
     lastMapPointUpdate: null,
 }
@@ -47,7 +48,8 @@ export default function mapData (state = initialMapDataState, action) {
             })
         case ADD_NEW_MAP_POINT:
             return Object.assign({}, state, {
-                mapboxNewPoint: action.newPoint
+                mapboxNewPoint: action.newPoint,
+                isAdding: true
             })
         case UPDATE_MAP_POINTS:            
             return Object.assign({}, state, {

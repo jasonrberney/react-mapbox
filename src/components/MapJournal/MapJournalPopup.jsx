@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
 import MapTripForm from '../MapTripForm/MapTripForm.jsx'
+import MapAddTripForm from '../MapTripForm/MapAddTripForm.jsx'
 //import { Popup } from 'react-mapbox-gl'
 
 class MapJournalPopup extends Component {
@@ -12,28 +13,55 @@ class MapJournalPopup extends Component {
     }
 
     _onClick() {
-        console.log('hello')
-        this.props.mapInfo.mapboxMap.flyTo({
-            center: this.props.feature.geometry.coordinates.slice(),
-            zoom: 9,
-            speed: 0.6,
-        })
+        if(this.props.feature !== null) {
+            this.props.mapInfo.mapboxMap.flyTo({
+                center: this.props.feature.geometry.coordinates.slice(),
+                zoom: 9,
+                speed: 0.6,
+            })
+        }
+        else if (this.props.coordinates !== null) {
+            this.props.mapInfo.mapboxMap.flyTo({
+                center: this.props.coordinates.slice(),
+                zoom: 9,
+                speed: 0.6,
+            })
+        }
     }
 
     render() { 
+        //debugger;
         let pointIndex = null;
-        for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
-            if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
-                pointIndex = i;
+        // if (this.props.data.isEditing) {
+        //     for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
+        //         if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
+        //             pointIndex = i;
+        //         }
+        //     }
+        // }
+        if (this.props.feature !== null) {
+            for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
+                if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
+                    pointIndex = i;
+                }
             }
         }
-
+        //debugger;
         return (
             <div>
                 {this.props.data.isEditing 
                     ? 
                         <div>
-                            <MapTripForm feature={this.props.feature}/>
+                            {this.props.data.isAdding 
+                                ? 
+                                <div>
+                                    <MapAddTripForm />
+                                </div>
+                                : 
+                                <div>
+                                    <MapTripForm feature={this.props.feature}/>
+                                </div>
+                            }
                         </div>
                     : 
                         <div>

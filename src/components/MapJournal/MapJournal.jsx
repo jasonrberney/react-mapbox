@@ -177,12 +177,29 @@ class MapJournal extends Component {
         mapboxMap.on('mouseup', (e) => {
             if (!isDragging) return;
             //debugger;
-            var coords = e.lngLat;
-        
-            console.log(coords)
+            let coordinates = e.lngLat;
+            //let coordinates = e.features[0].geometry.coordinates.slice();         
+
+            console.log(coordinates)
             canvas.style.cursor = '';
             isDragging = false;
-        
+            //debugger;
+
+            if (this.props.data.isAdding) {
+                debugger;
+                new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                //.setHTML(`<div><strong>${title}</strong><p>${experience}</p></div>`)
+                .setHTML(`<div id='popup'></div>`)
+                //.setHTML(`${<MapJournalPopup />}`)
+                //.setHTML(myPopup(e.features[0]))
+                .addTo(this.props.mapInfo.mapboxMap)
+                .isOpen(ReactDOM.render(<Provider store={store}>
+                                            <MapJournalPopup feature={null} coordinates={coordinates}/>
+                                        </Provider>, 
+                                        document.getElementById('popup')))
+            }
+                                    
             // Unbind mouse events
             mapboxMap.off('mousemove');
         })

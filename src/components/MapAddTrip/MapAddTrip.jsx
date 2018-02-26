@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { addNewMapPoint } from '../../redux/mapData.jsx'
+import { addNewMapPoint, toggleEditing } from '../../redux/mapData.jsx'
 
 class MapAddTrip extends Component {
     constructor(props) {
@@ -26,6 +26,7 @@ class MapAddTrip extends Component {
         }];
 
         this.props.dispatch(addNewMapPoint(newPoint))
+        this.props.dispatch(toggleEditing())
 
         // Add a single point to the map
         this.props.mapInfo.mapboxMap.addSource('newPointSource', {
