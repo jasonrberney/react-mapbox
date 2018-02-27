@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect, Provider } from 'react-redux'
+import ReactDOM from 'react-dom'
 import { dispatch } from 'redux'
-import { addNewMapPoint, toggleEditing } from '../../redux/mapData.jsx'
+import { store } from '../../index.js'
+import MapJournalPopup from '../MapJournal/MapJournalPopup.jsx'
+import { addNewMapPoint, toggleEditing, mapPopup } from '../../redux/mapData.jsx'
 
 class MapAddTrip extends Component {
     constructor(props) {
@@ -11,6 +14,8 @@ class MapAddTrip extends Component {
     }
 
     _onClick() {
+        this.props.dispatch(toggleEditing())
+
         let newPoint = [{
             id: 4,
             type: "Feature",
@@ -26,7 +31,18 @@ class MapAddTrip extends Component {
         }];
 
         this.props.dispatch(addNewMapPoint(newPoint))
-        this.props.dispatch(toggleEditing())
+
+        let popup = new mapboxgl.Popup()
+            .setLngLat(newPoint[0].geometry.coordinates)
+            .setHTML(`<div id='popup'></div>`)
+            .addTo(this.props.mapInfo.mapboxMap)
+
+        this.props.dispatch(mapPopup(popup));
+        
+        ReactDOM.render(<Provider store={store}>
+                <MapJournalPopup feature={null} coordinates={newPoint[0].geometry.coordinates}/>
+            </Provider>, 
+            document.getElementById('popup'))                                
 
         // Add a single point to the map
         this.props.mapInfo.mapboxMap.addSource('newPointSource', {
@@ -46,6 +62,7 @@ class MapAddTrip extends Component {
                 "circle-color": "#3887be"
             }
         });
+
     }
 
     render() {

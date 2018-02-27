@@ -142,13 +142,10 @@ class MapJournal extends Component {
         let canvas = mapboxMap.getCanvasContainer();
 
         mapboxMap.on('mousedown', (e) => {
-            //debugger;
-
             if (!isCursorOverPoint) return;
             
             isDragging = true;
 
-            //debugger;
             // Set a cursor indicator
             canvas.style.cursor = 'grab';
             //map.on('mousemove', onmoving);
@@ -166,12 +163,13 @@ class MapJournal extends Component {
             // Set a UI indicator for dragging.
             canvas.style.cursor = 'grabbing';
         
-            // Update the Point feature in `geojson` coordinates
-            // and call setData to the source layer `point` on it.
+            // Update the Point feature in `geojson` coordinates and call setData to the source layer `point` on it.
             let moveMapPoint = this.props.data.mapboxNewPoint;
             moveMapPoint[0].geometry.coordinates = [coords.lng, coords.lat];
-
             mapboxMap.getSource('newPointSource').setData(moveMapPoint[0]);
+            
+            // When point is moved, set new lnglat for popup
+            this.props.data.popup.setLngLat(moveMapPoint[0].geometry.coordinates)
         })
         
         mapboxMap.on('mouseup', (e) => {
@@ -183,22 +181,6 @@ class MapJournal extends Component {
             console.log(coordinates)
             canvas.style.cursor = '';
             isDragging = false;
-            //debugger;
-
-            if (this.props.data.isAdding) {
-                debugger;
-                new mapboxgl.Popup()
-                .setLngLat(coordinates)
-                //.setHTML(`<div><strong>${title}</strong><p>${experience}</p></div>`)
-                .setHTML(`<div id='popup'></div>`)
-                //.setHTML(`${<MapJournalPopup />}`)
-                //.setHTML(myPopup(e.features[0]))
-                .addTo(this.props.mapInfo.mapboxMap)
-                .isOpen(ReactDOM.render(<Provider store={store}>
-                                            <MapJournalPopup feature={null} coordinates={coordinates}/>
-                                        </Provider>, 
-                                        document.getElementById('popup')))
-            }
                                     
             // Unbind mouse events
             mapboxMap.off('mousemove');

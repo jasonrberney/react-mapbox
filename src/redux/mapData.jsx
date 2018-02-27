@@ -2,6 +2,7 @@ const ADD_MAP_DATA = 'ADD_MAP_DATA';
 //const ADD_USER_MAP_DATA = 'ADD_USER_MAP_DATA';
 const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
+const MAP_POPUP = 'MAP_POPUP';
 const TOGGLE_EDITING = 'TOGGLE_EDITING';
 
 const initialMapDataState = {
@@ -9,6 +10,7 @@ const initialMapDataState = {
     mapboxNewPoint: [],
     isAdding: false,
     isEditing: false,
+    popup: null,
     lastMapPointUpdate: null,
 }
 
@@ -30,6 +32,13 @@ export function updateMapPoints(points) {
     return {
         type: UPDATE_MAP_POINTS,
         points
+    }
+}
+
+export function mapPopup(popup) {
+    return {
+        type: MAP_POPUP,
+        popup
     }
 }
 
@@ -55,6 +64,10 @@ export default function mapData (state = initialMapDataState, action) {
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.points,
                 lastMapPointUpdate: new Date()
+            })
+        case MAP_POPUP:
+            return Object.assign({}, state, {
+                popup: action.popup
             })
         case TOGGLE_EDITING:
             return Object.assign({}, state, {
