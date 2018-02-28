@@ -38,7 +38,7 @@ class MapAddTrip extends Component {
             .addTo(this.props.mapInfo.mapboxMap)
 
         this.props.dispatch(mapPopup(popup));
-        
+
         ReactDOM.render(<Provider store={store}>
                 <MapJournalPopup feature={null} coordinates={newPoint[0].geometry.coordinates}/>
             </Provider>, 
