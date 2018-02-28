@@ -2,6 +2,8 @@ const CHANGE_LAT_LNG_ZOOM = 'CHANGE_LAT_LNG_ZOOM';
 const SET_MAPBOX_MAP = 'SET_MAPBOX_MAP';
 const CHANGE_BASEMAP = 'CHANGE_BASEMAP';
 const UPDATE_MAP_SOURCE = 'UPDATE_MAP_SOURCE';
+const REMOVE_MAP_SOURCE = 'REMOVE_MAP_SOURCE';
+const REMOVE_MAP_LAYER = 'REMOVE_MAP_LAYER';
 
 const initialMapState = {
     mapboxMap: null,
@@ -41,6 +43,19 @@ export function updateMapSource (points) {
     }
 }
 
+export function removeMapSource() {
+    return {
+        type: REMOVE_MAP_SOURCE
+    }
+}
+
+export function removeMapLayer(layer) {
+    return {
+        type: REMOVE_MAP_LAYER,
+        layer
+    }
+}
+
 export default function mapboxMapInfo (state = initialMapState, action) {
     switch(action.type) {
         case SET_MAPBOX_MAP:
@@ -73,6 +88,8 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 type: "FeatureCollection",
                 features: action.points
             })
+        case REMOVE_MAP_LAYER:
+            state.mapboxMap.removeLayer(action.layer)
         default:
             return state
     }

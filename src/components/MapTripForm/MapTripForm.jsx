@@ -16,7 +16,8 @@ class MapTripForm extends Component {
         this._onSubmit = this._onSubmit.bind(this)
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        debugger;
         this.setState({
             title: this.props.feature.properties.title, 
             experience: this.props.feature.properties.experience

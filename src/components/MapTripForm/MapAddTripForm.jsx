@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { updateMapPoints, toggleEditing } from '../../redux/mapData.jsx'
-import { updateMapSource } from '../../redux/mapboxMapInfo.jsx'
+import { updateWithNewPoint, submitNewPoint, toggleEditing } from '../../redux/mapData.jsx'
+import { updateMapSource, removeMapSource, removeMapLayer } from '../../redux/mapboxMapInfo.jsx'
 
 class MapAddTripForm extends Component {
     constructor(props) {
@@ -31,8 +31,16 @@ class MapAddTripForm extends Component {
     _onSubmit(e) {
         e.preventDefault()
 
-        //this.props.dispatch(updateMapPoints(updatedPoints))
-        //this.props.dispatch(updateMapSource(updatedPoints))
+        this.props.dispatch(submitNewPoint(this.state.title, this.state.experience))
+
+        let newMapboxDataFeatures = this.props.data.mapboxDataFeatures.map((feature) => {
+            return feature
+        })
+        newMapboxDataFeatures.push(this.props.data.mapboxNewPoint[0])
+        this.props.dispatch(updateWithNewPoint(newMapboxDataFeatures))
+        debugger;
+        this.props.dispatch(removeMapLayer('newPointLayer'))
+        this.props.dispatch(updateMapSource(newMapboxDataFeatures))
         this.props.dispatch(toggleEditing())
     }
 

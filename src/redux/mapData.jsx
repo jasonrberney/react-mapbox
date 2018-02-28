@@ -1,8 +1,9 @@
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
-//const ADD_USER_MAP_DATA = 'ADD_USER_MAP_DATA';
-const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
 const MAP_POPUP = 'MAP_POPUP';
+const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
+const SUBMIT_NEW_POINT = 'SUBMIT_NEW_POINT';
+const UPDATE_WITH_NEW_POINT = 'UPDATE_WITH_NEW_POINT';
 const TOGGLE_EDITING = 'TOGGLE_EDITING';
 
 const initialMapDataState = {
@@ -21,6 +22,13 @@ export function addDefaultMapData(mapPointData) {
     }
 }
 
+export function updateMapPoints(points) {
+    return {
+        type: UPDATE_MAP_POINTS,
+        points
+    }
+}
+
 export function addNewMapPoint(newPoint) {
     return {
         type: ADD_NEW_MAP_POINT,
@@ -28,9 +36,17 @@ export function addNewMapPoint(newPoint) {
     }
 }
 
-export function updateMapPoints(points) {
+export function submitNewPoint(title, experience) {
     return {
-        type: UPDATE_MAP_POINTS,
+        type: SUBMIT_NEW_POINT,
+        title,
+        experience
+    }
+}
+
+export function updateWithNewPoint(points) {
+    return {
+        type: UPDATE_WITH_NEW_POINT,
         points
     }
 }
@@ -65,6 +81,37 @@ export default function mapData (state = initialMapDataState, action) {
                 mapboxDataFeatures: action.points,
                 lastMapPointUpdate: new Date()
             })
+        case SUBMIT_NEW_POINT:
+            let point = state.mapboxNewPoint
+            point[0].properties.title = action.title
+            point[0].properties.experience = action.experience
+
+            return Object.assign({}, state, {
+                mapboxNewPoint: point,
+                isAdding: false
+            })
+            // const updatedPoints = state.newPoint.map(point => {
+            //     if(point.id === action.id){
+            //         return {
+            //             ...point, 
+            //             ...action.payload
+            //         }
+            //     }
+            //     return point
+            // })
+            // return updatedPoints
+        case UPDATE_WITH_NEW_POINT:    
+            return Object.assign({}, state, {
+                mapboxDataFeatures: action.points
+            })        
+            // return {
+            //     ...state,
+            //     mapboxDataFeatures: [
+            //         ...state.mapboxDataFeatures, 
+            //         state.newPoint
+            //     ],
+            //     lastMapPointUpdate: new Date()
+            // }
         case MAP_POPUP:
             return Object.assign({}, state, {
                 popup: action.popup

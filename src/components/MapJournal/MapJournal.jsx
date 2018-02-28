@@ -84,7 +84,7 @@ class MapJournal extends Component {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-
+            debugger;
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 //.setHTML(`<div><strong>${title}</strong><p>${experience}</p></div>`)

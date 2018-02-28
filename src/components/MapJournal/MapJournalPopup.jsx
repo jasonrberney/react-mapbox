@@ -8,7 +8,9 @@ import MapAddTripForm from '../MapTripForm/MapAddTripForm.jsx'
 class MapJournalPopup extends Component {
     constructor(props) {
         super(props)
-
+        this.state = {
+            
+        }
         this._onClick = this._onClick.bind(this)
     }
 
@@ -30,15 +32,8 @@ class MapJournalPopup extends Component {
     }
 
     render() { 
-        //debugger;
         let pointIndex = null;
-        // if (this.props.data.isEditing) {
-        //     for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
-        //         if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
-        //             pointIndex = i;
-        //         }
-        //     }
-        // }
+
         if (this.props.feature !== null) {
             for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
                 if (this.props.data.mapboxDataFeatures[i].id === this.props.feature.id) {
@@ -46,7 +41,14 @@ class MapJournalPopup extends Component {
                 }
             }
         }
-        //debugger;
+        else if (this.props.feature === null) {
+            for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
+                if (this.props.data.mapboxDataFeatures[i].id === this.props.data.mapboxNewPoint[0].id) {
+                    pointIndex = i;
+                }
+            }
+        }
+        debugger;
         return (
             <div>
                 {this.props.data.isEditing 
