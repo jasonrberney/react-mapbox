@@ -48,7 +48,7 @@ class MapJournalPopup extends Component {
                 }
             }
         }
-        debugger;
+
         return (
             <div>
                 {this.props.data.isEditing 

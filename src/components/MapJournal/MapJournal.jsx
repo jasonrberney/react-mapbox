@@ -196,9 +196,9 @@ class MapJournal extends Component {
         };
 
         return (
-            <div className='container'>
+            <div className={container}>
                 <div ref={el => this.mapContainer = el} style={style}>
-                    <div className='latlng'>
+                    <div className={latlng}>
                         <div>{`Longitude: ${this.props.mapInfo.lng} Latitude: ${this.props.mapInfo.lat} Zoom: ${this.props.mapInfo.zoom}`}</div>
                     </div>
                     <BasemapSelector />

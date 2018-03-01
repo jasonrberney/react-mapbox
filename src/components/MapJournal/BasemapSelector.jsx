@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
 import { changeBasemap } from '../../redux/mapboxMapInfo.jsx'
-import { basemap } from './styles.css'
+import { basemapContainer } from './styles.css'
 
 class BasemapSelector extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class BasemapSelector extends Component {
 
     render () {
         return (
-            <div className='basemapContainer'>
+            <div className={basemapContainer}>
                 <ul>
                     <li>
                         <input type="radio" name="streets" checked={'streets' === this.props.mapInfo.basemap} onChange={this._onChange} />

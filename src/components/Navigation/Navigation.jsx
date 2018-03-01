@@ -7,14 +7,14 @@ class Navigation extends Component {
     render () {
         const currentPath = window.location.pathname
         return (
-            <div className='container'>
-                <nav className='navContainer'>
+            <div className={container}>
+                <nav className={navContainer}>
                     <ul>
                         <li>
-                            <NavLink exact className='link' activeClassName='active' to='/'>{'Home'}</NavLink>
+                            <NavLink exact className={link} activeClassName={active} to='/'>{'Home'}</NavLink>
                         </li>
                         <li>
-                            <NavLink exact className='link' activeClassName='active' to='/mapjournal'>{'Map Journal'}</NavLink>
+                            <NavLink exact className={link} activeClassName={active} to='/mapjournal'>{'Map Journal'}</NavLink>
                         </li>
                         <li>
                             {currentPath.includes('mapjournal')
