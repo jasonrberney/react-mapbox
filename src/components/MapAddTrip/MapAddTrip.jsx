@@ -5,6 +5,7 @@ import { dispatch } from 'redux'
 import { store } from '../../index.js'
 import MapJournalPopup from '../MapJournal/MapJournalPopup.jsx'
 import { addNewMapPoint, toggleEditing, mapPopup } from '../../redux/mapData.jsx'
+import { addTrip } from './styles.css'
 
 class MapAddTrip extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class MapAddTrip extends Component {
 
         this.props.dispatch(addNewMapPoint(newPoint))
 
-        let popup = new mapboxgl.Popup()
+        let popup = new mapboxgl.Popup({closeOnClick:false})
             .setLngLat(newPoint[0].geometry.coordinates)
             .setHTML(`<div id='popup'></div>`)
             .addTo(this.props.mapInfo.mapboxMap)
@@ -67,8 +68,8 @@ class MapAddTrip extends Component {
 
     render() {
         return (
-            <button onClick={this._onClick}>
-                {'Add A Trip'}
+            <button className={addTrip} onClick={this._onClick}>
+                {'Add an Adventure'}
             </button>
         )
     }

@@ -1,0 +1,16 @@
+.addTrip {
+    font-size: 20px;
+    font-family: serif;
+    padding: 10px 24px;
+    border-radius: 12px;
+    background-color: #9CBA7F;
+    color: black;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.addTrip:hover {
+    background-color: #4a90e2;
+    cursor: pointer;
+}

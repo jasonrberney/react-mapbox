@@ -1,13 +1,14 @@
 .container {
     width: 100%;
     color: #458B00;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .navContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 20px 0px 0px 0px;
     align-items: center;
     width: 100%;
     max-width: 1100px;

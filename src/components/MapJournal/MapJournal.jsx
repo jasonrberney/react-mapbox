@@ -76,6 +76,7 @@ class MapJournal extends Component {
         })
 
         mapboxMap.on('click', 'mapPointsLayer', (e) => {
+            if (this.props.data.popup.isOpen()) return;
             // When a click event occurs on a feature in the mapPointsLayer layer, open a popup at the location
             let coordinates = e.features[0].geometry.coordinates.slice();         
 
@@ -84,8 +85,8 @@ class MapJournal extends Component {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-            debugger;
-            new mapboxgl.Popup()
+
+            new mapboxgl.Popup({closeOnClick:false})
                 .setLngLat(coordinates)
                 //.setHTML(`<div><strong>${title}</strong><p>${experience}</p></div>`)
                 .setHTML(`<div id='popup'></div>`)
@@ -100,6 +101,22 @@ class MapJournal extends Component {
             // setTimeout(() => {
             //     ReactDOM.render(<MapJournalPopup />, document.getElementById('popup'))
             // }, 500)
+        })
+
+        mapboxMap.on('click', 'newPointLayer', (e) => {
+            if (this.props.data.popup.isOpen() === false) {
+                this.props.data.popup.addTo(this.props.mapInfo.mapboxMap);
+            } 
+            // // When a click event occurs on a feature in the mapPointsLayer layer, open a popup at the location
+            // let coordinates = e.features[0].geometry.coordinates.slice();         
+
+            // // Ensure that if the map is zoomed out such that multiple copies of the feature are visible,
+            // // the popup appears over the copy being pointed to.
+            // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            //     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            // }
+
+            // this.props.data.popup.isOpen(true);
         })
 
         // Change the cursor to a pointer when the mouse is over the places layer.
