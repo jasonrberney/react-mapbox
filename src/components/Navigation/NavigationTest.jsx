@@ -15,7 +15,10 @@ function NavLinks ({isAuthed}) {
                 }
             </li>
           </ul>
-        : null
+        : <ul>
+            <li><Link className={link} activeClassName={active} to='/'>{'Home'}</Link></li>
+            <li><Link className={link} activeClassName={active} to='/mapjournal'>{'Map Journal'}</Link></li>
+          </ul>
 }
 
 function ActionLinks ({isAuthed}) {
@@ -24,7 +27,6 @@ function ActionLinks ({isAuthed}) {
         <li><Link className={link} activeClassName={active} to='/logout'>{'Logout'}</Link></li>
       </ul>
     : <ul>
-        <li><Link className={link} activeClassName={active} to='/'>{'Home'}</Link></li>
         <li><Link className={link} activeClassName={active} to='/auth'>{'Login'}</Link></li>
       </ul>
 }
