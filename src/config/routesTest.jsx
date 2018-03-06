@@ -1,11 +1,11 @@
 import React from 'react'
-import { Router, hashHistory, IndexRoute } from 'react-router'
-import { AppContainer, HomeContainer } from '../containers'
+import { Router, hashHistory, IndexRoute, Route } from 'react-router'
+import { AppContainer, HomeContainer, MapContainer } from '../containers'
 
 const routes = (
     <Router history={hashHistory}>
         <Router path='/' component={AppContainer}>
-
+            <Route path='/mapjournal' component={MapContainer} />
             {/* If none of the Routes match, you'll always go to the index route. */}
             <IndexRoute component={HomeContainer} />
         </Router>

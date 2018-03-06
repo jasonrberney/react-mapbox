@@ -5,7 +5,7 @@ class AppContainer extends Component {
     render () {
         return (
             <div>
-                <NavigationTest isAuthed={false}/>
+                <NavigationTest isAuthed={true}/>
                 {this.props.children}
             </div>
         )

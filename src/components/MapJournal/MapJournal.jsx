@@ -76,7 +76,7 @@ class MapJournal extends Component {
         })
 
         mapboxMap.on('click', 'mapPointsLayer', (e) => {
-            if (this.props.data.popup.isOpen()) return;
+            if (this.props.data.popup !== null && this.props.data.popup.isOpen()) return;
             // When a click event occurs on a feature in the mapPointsLayer layer, open a popup at the location
             let coordinates = e.features[0].geometry.coordinates.slice();         
 

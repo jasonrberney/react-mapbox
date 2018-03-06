@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { navContainer, link, active, container } from './styles.css'
+import MapAddTrip from '../MapAddTrip/MapAddTrip.jsx'
 
 function NavLinks ({isAuthed}) {
-    const currentPath = window.location.pathname
+    const currentPath = window.location.hash
     return isAuthed === true
         ? <ul>
             <li><Link className={link} activeClassName={active} to='/'>{'Home'}</Link></li>
