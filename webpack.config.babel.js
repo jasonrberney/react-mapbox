@@ -40,6 +40,7 @@ const base = {
     path: PATHS.build,
     filename: 'index_bundle.js'
   },
+  // long crazy line in the css loader is partially to make css readable in dev tools
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },

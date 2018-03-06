@@ -1,7 +1,7 @@
 import React from 'react'
 import { container, title, subHeader } from './styles.css'
 
-export default function Home () {
+export default function Home (props) {
     return(
         <div className={container}>
             <p className={title}>{'Travel Young'}</p>
