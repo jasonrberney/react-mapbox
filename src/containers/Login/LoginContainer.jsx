@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Login from '../../components/Login/Login.jsx'
-import auth from '../../helpers/auth.jsx'
+//import auth from '../../helpers/auth.jsx'
 import { connect } from 'react-redux'
 import { bindActionCreators, dispatch } from 'redux'
 import * as appUsersActionCreators from '../../redux/appUsers.jsx'
@@ -13,13 +13,14 @@ class LoginContainer extends Component {
     }
 
     handleAuth () {
-        this.props.dispatch(appUsersActionCreators.fetchingUser())
-        auth().then((user) => {
-            this.props.dispatch(appUsersActionCreators.fetchingUserSuccess(user.uid, user, Date.now()))
-            this.props.dispatch(appUsersActionCreators.authUser(user.uid))
-            console.log('Authed User', user)
-        })
-        .catch((error) => this.props.dispatch(appUsersActionCreators.fetchingUserFailure(error)))
+        this.props.dispatch(appUsersActionCreators.fetchAndHandleAuthedUser())
+        // this.props.dispatch(appUsersActionCreators.fetchingUser())
+        // auth().then((user) => {
+        //     this.props.dispatch(appUsersActionCreators.fetchingUserSuccess(user.uid, user, Date.now()))
+        //     this.props.dispatch(appUsersActionCreators.authUser(user.uid))
+        //     console.log('Authed User', user)
+        // })
+        // .catch((error) => this.props.dispatch(appUsersActionCreators.fetchingUserFailure(error)))
     }
 
     render() {
