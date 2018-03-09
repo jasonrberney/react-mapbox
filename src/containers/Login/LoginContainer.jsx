@@ -24,6 +24,7 @@ class LoginContainer extends Component {
         //     console.log('Authed User', user)
         // })
         // .catch((error) => this.props.dispatch(appUsersActionCreators.fetchingUserFailure(error)))
+
     }
 
     render() {

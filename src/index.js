@@ -15,6 +15,10 @@ export const store = createStore(reducers, applyMiddleware(thunk))
 
 // For protected routes. Re-routes you to mapjournal if logged in
 function checkAuth(nextState, replace) {
+    if (store.getState().isFetching === true) {
+        return
+    }
+    
     const isAuthed = checkIfAuthed(store)
     const nextPathName = nextState.location.pathname
     if (nextPathName === '/') {
