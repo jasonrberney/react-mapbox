@@ -2,12 +2,7 @@ import firebase from 'firebase'
 
 // Initialize Firebase
 const config = {
-    apiKey: "AIzaSyCVKl4sZD_oHypifOiMXIECtDyChp5-NWM",
-    authDomain: "travelyoung-c743b.firebaseapp.com",
-    databaseURL: "https://travelyoung-c743b.firebaseio.com",
-    projectId: "travelyoung-c743b",
-    storageBucket: "travelyoung-c743b.appspot.com",
-    messagingSenderId: "1040177657754"
+
 };
 
 firebase.initializeApp(config);
