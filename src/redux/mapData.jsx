@@ -69,9 +69,10 @@ export function toggleEditing() {
 
 export function mapPointFanout(points) {
     return function (dispatch, getState) {
-        //const uid = getState.appUsers.authedId
+        debugger;
+        const uid = getState().appUsers.authedId
 
-        saveTravel(points)
+        saveTravel(points, uid)
             .then((travelWithId) => {
                 dispatch(updateWithNewPoint(points))
                 dispatch(removeMapLayer('newPointLayer'))

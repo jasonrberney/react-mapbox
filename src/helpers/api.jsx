@@ -10,16 +10,16 @@ function saveToTravel (travel) {
     }
 }
 
-function saveToUsersTravel (travel, travelId) {
-    return ref.child(`usersTravel/${travel.uid}/${travelId}`)
+function saveToUsersTravel (travel, travelId, uid) {
+    return ref.child(`usersTravel/${uid}/${travelId}`)
         .set({...travel, travelId})
 }
 
-export function saveTravel (travel) {
+export function saveTravel (travel, uid) {
     const { travelId, travelPromise } = saveToTravel(travel)
 
     return Promise.all([
         travelPromise,
-        saveToUsersTravel(travel, travelId)
+        saveToUsersTravel(travel, travelId, uid)
     ]).then(() => ({...travel, travelId}))
 }
