@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { updateWithNewPoint, submitNewPoint, toggleEditing } from '../../redux/mapData.jsx'
+import { updateWithNewPoint, toggleEditing, submitNewPoint, mapPointFanout } from '../../redux/mapData.jsx'
 import { updateMapSource, removeMapSource, removeMapLayer } from '../../redux/mapboxMapInfo.jsx'
 
 class MapAddTripForm extends Component {
@@ -37,11 +37,14 @@ class MapAddTripForm extends Component {
             return feature
         })
         newMapboxDataFeatures.push(this.props.data.mapboxNewPoint[0])
-        this.props.dispatch(updateWithNewPoint(newMapboxDataFeatures))
-        debugger;
-        this.props.dispatch(removeMapLayer('newPointLayer'))
-        this.props.dispatch(updateMapSource(newMapboxDataFeatures))
-        this.props.dispatch(toggleEditing())
+        this.props.dispatch(mapPointFanout(newMapboxDataFeatures))
+        // BELOW was replaced with thunk to push to firebase
+        // this.props.dispatch(updateWithNewPoint(newMapboxDataFeatures))
+        // //debugger;
+        // this.props.dispatch(removeMapLayer('newPointLayer'))
+        // this.props.dispatch(updateMapSource(newMapboxDataFeatures))
+        // this.props.dispatch(toggleEditing())
+        console.log(this.props)
     }
 
     render() {

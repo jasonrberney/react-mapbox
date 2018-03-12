@@ -18,10 +18,12 @@ class MapTripForm extends Component {
 
     componentDidMount() {
         debugger;
-        this.setState({
-            title: this.props.feature.properties.title, 
-            experience: this.props.feature.properties.experience
-        })
+        if (this.props.feature) {
+            this.setState({
+                title: this.props.feature.properties.title, 
+                experience: this.props.feature.properties.experience
+            })
+        }
     }
 
     _titleChange(e) {

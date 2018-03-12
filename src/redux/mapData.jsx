@@ -1,3 +1,6 @@
+import { saveTravel } from '../helpers/api.jsx'
+import { removeMapLayer, updateMapSource } from './mapboxMapInfo.jsx'
+
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
 const MAP_POPUP = 'MAP_POPUP';
@@ -61,6 +64,23 @@ export function mapPopup(popup) {
 export function toggleEditing() {
     return {
         type: TOGGLE_EDITING
+    }
+}
+
+export function mapPointFanout(points) {
+    return function (dispatch, getState) {
+        //const uid = getState.appUsers.authedId
+
+        saveTravel(points)
+            .then((travelWithId) => {
+                dispatch(updateWithNewPoint(points))
+                dispatch(removeMapLayer('newPointLayer'))
+                dispatch(updateMapSource(points))
+                dispatch(toggleEditing())
+            })
+            .catch((err) => {
+                console.warn('Error in duckFanout', err)
+            })
     }
 }
 
