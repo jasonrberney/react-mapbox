@@ -8,9 +8,10 @@ import getRoutes from './config/routesTest.jsx'
 import mapboxMapInfo from './redux/mapboxMapInfo.jsx';
 import mapData from './redux/mapData.jsx'
 import appUsers from './redux/appUsers.jsx'
+import listeners from './redux/listeners.jsx'
 import { checkIfAuthed } from './helpers/auth.jsx'
 
-const reducers = combineReducers({mapboxMapInfo, mapData, appUsers})
+const reducers = combineReducers({mapboxMapInfo, mapData, appUsers, listeners})
 export const store = createStore(reducers, compose(
     applyMiddleware(thunk),
     // hooks up Redux chrome extension. If extension does not exist, only take the first argument

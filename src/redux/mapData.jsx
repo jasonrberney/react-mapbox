@@ -1,5 +1,6 @@
-import { saveTravel } from '../helpers/api.jsx'
+import { saveTravel, listenToTravel } from '../helpers/api.jsx'
 import { removeMapLayer, updateMapSource } from './mapboxMapInfo.jsx'
+import { addListener } from './listeners.jsx'
 
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
@@ -8,12 +9,16 @@ const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
 const SUBMIT_NEW_POINT = 'SUBMIT_NEW_POINT';
 const UPDATE_WITH_NEW_POINT = 'UPDATE_WITH_NEW_POINT';
 const TOGGLE_EDITING = 'TOGGLE_EDITING';
+const SETTING_TRAVEL_LISTENER = 'SETTING_TRAVEL_LISTENER'
+const SETTING_TRAVEL_LISTENER_ERROR = 'SETTING_TRAVEL_LISTENER_ERROR'
+const SETTING_TRAVEL_LISTENER_SUCCESS = 'SETTING_TRAVEL_LISTENER_SUCCESS'
 
 const initialMapDataState = {
     mapboxDataFeatures: [],
     mapboxNewPoint: [],
     isAdding: false,
     isEditing: false,
+    isFetching: false,
     popup: null,
     lastMapPointUpdate: null,
 }
@@ -67,13 +72,35 @@ export function toggleEditing() {
     }
 }
 
+function settingTravelListener () {
+    return {
+      type: SETTING_TRAVEL_LISTENER,
+    }
+}
+  
+function settingTravelListenerError (error) {
+    console.warn(error)
+    return {
+      type: SETTING_TRAVEL_LISTENER_ERROR,
+      error: 'Error fetching feeds.',
+    }
+}
+  
+function settingTravelListenerSuccess (duckIds) {
+    return {
+      type: SETTING_TRAVEL_LISTENER_SUCCESS,
+      duckIds,
+    }
+}
+
 export function mapPointFanout(points) {
     return function (dispatch, getState) {
-        debugger;
+
         const uid = getState().appUsers.authedId
 
         saveTravel(points, uid)
             .then((travelWithId) => {
+                debugger;
                 dispatch(updateWithNewPoint(points))
                 dispatch(removeMapLayer('newPointLayer'))
                 dispatch(updateMapSource(points))
@@ -82,6 +109,30 @@ export function mapPointFanout(points) {
             .catch((err) => {
                 console.warn('Error in duckFanout', err)
             })
+    }
+}
+
+export function setTravelData () {
+    let initialFetch = true;
+    return function (dispatch, getState) {
+        debugger;
+        if (getState().listeners.travelData === true) {
+            return
+        }
+
+        dispatch(addListener('travelData'))
+        console.log(getState())
+        dispatch(settingTravelListener())
+
+        const uid = getState().appUsers.authedId;
+        debugger;
+        listenToTravel(uid, ({travel}) => {
+            //dispatch(addDefaultMapData())
+            debugger;
+            initialFetch === true
+                ? dispatch(addDefaultMapData(travel)) 
+                : dispatch(UPDATE_MAP_POINTS(travel)) 
+        }, (error) => dispatch(settingTravelListenerError(error)))
     }
 }
 
@@ -141,6 +192,23 @@ export default function mapData (state = initialMapDataState, action) {
             return Object.assign({}, state, {
                 isEditing: !state.isEditing
             })
+        case SETTING_TRAVEL_LISTENER:
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case SETTING_TRAVEL_LISTENER_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error,
+            }
+        case SETTING_TRAVEL_LISTENER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+            }
         default: 
             return state             
     }
