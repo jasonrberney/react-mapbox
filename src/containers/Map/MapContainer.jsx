@@ -5,12 +5,12 @@ import {setTravelData} from '../../redux/mapData.jsx'
 
 class MapContainer extends Component {
     componentDidMount () {
-        debugger;
+
         if (this.props.appUsers.authedId) {
             const uid = this.props.appUsers.authedId
         }
 
-        this.props.dispatch(setTravelData())
+        //this.props.dispatch(setTravelData())
         //const currentTravel = listenToTravel(uid)
         //debugger;
 
@@ -18,14 +18,16 @@ class MapContainer extends Component {
 
     render () {
         return (
-            <MapJournal />
+            <MapJournal userData={this.props.data} loggedIn = {this.props.appUsers.authedId ? this.props.appUsers.authedId : null}
+            />
         )
     }
 }
 
 function mapStateToProps (state) {
     return {
-        appUsers: state.appUsers
+        appUsers: state.appUsers,
+        data: state.mapData.mapboxDataFeatures
     }
 }
 

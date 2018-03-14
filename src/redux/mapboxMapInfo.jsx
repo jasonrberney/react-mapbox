@@ -84,6 +84,7 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 basemap: action.basemap
             })
         case UPDATE_MAP_SOURCE:
+            debugger;
             state.mapboxMap.getSource('mapPointsSource').setData({
                 type: "FeatureCollection",
                 features: action.points

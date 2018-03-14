@@ -10,7 +10,7 @@ import { connect, Provider } from 'react-redux'
 import { dispatch } from 'redux'
 import DefaultData from '../../helpers/DefaultData.jsx'
 import { setMapboxMap, changeLatLngZoom } from '../../redux/mapboxMapInfo.jsx'
-import { addDefaultMapData } from '../../redux/mapData.jsx'
+import { addDefaultMapData, setTravelData } from '../../redux/mapData.jsx'
 import { store } from '../../index.js'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
@@ -24,7 +24,7 @@ class MapJournal extends Component {
     componentDidMount() {
         const { lng, lat, zoom } = this.props.mapInfo;
 
-        let loggedIn = true;
+        let isDefaultMapData = this.props.loggedIn === null ? DefaultData : false
 
         const mapboxMap = new mapboxgl.Map({
             container: this.mapContainer,
@@ -34,9 +34,13 @@ class MapJournal extends Component {
         });
 
         mapboxMap.on('load', () => {
-            let initialMapData = loggedIn === true ? DefaultData : UserData
 
-            this.props.dispatch(addDefaultMapData(initialMapData))
+            if (!isDefaultMapData) {
+                this.props.dispatch(setTravelData())
+            }
+            else {
+                this.props.dispatch(addDefaultMapData(DefaultData))
+            }
 
             mapboxMap.addSource('mapPointsSource', {
                 type: "geojson", 
@@ -228,7 +232,8 @@ class MapJournal extends Component {
 function mapStateToProps(state) {
     return {
         mapInfo: state.mapboxMapInfo,
-        data: state.mapData
+        data: state.mapData,
+        authedId: state.appUsers.authedId
     }
 }
 

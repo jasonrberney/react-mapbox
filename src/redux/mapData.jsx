@@ -94,6 +94,7 @@ function settingTravelListenerSuccess (duckIds) {
 }
 
 export function mapPointFanout(points) {
+    debugger;
     return function (dispatch, getState) {
 
         const uid = getState().appUsers.authedId
@@ -101,37 +102,39 @@ export function mapPointFanout(points) {
         saveTravel(points, uid)
             .then((travelWithId) => {
                 debugger;
-                dispatch(updateWithNewPoint(points))
+                //dispatch(updateWithNewPoint(points))
                 dispatch(removeMapLayer('newPointLayer'))
-                dispatch(updateMapSource(points))
+                //dispatch(updateMapSource(points))
                 dispatch(toggleEditing())
             })
             .catch((err) => {
-                console.warn('Error in duckFanout', err)
+                console.warn('Error in mapPointFanout', err)
             })
     }
 }
 
 export function setTravelData () {
+    debugger;
     let initialFetch = true;
     return function (dispatch, getState) {
-        debugger;
+
         if (getState().listeners.travelData === true) {
             return
         }
 
         dispatch(addListener('travelData'))
-        console.log(getState())
         dispatch(settingTravelListener())
 
         const uid = getState().appUsers.authedId;
-        debugger;
-        listenToTravel(uid, ({travel}) => {
-            //dispatch(addDefaultMapData())
+
+        listenToTravel(uid, ([travel]) => {
             debugger;
             initialFetch === true
                 ? dispatch(addDefaultMapData(travel)) 
-                : dispatch(UPDATE_MAP_POINTS(travel)) 
+                : dispatch(updateMapPoints(travel)) 
+            initialFetch = false
+            dispatch(updateMapSource(travel))
+            console.log(getState())
         }, (error) => dispatch(settingTravelListenerError(error)))
     }
 }
@@ -139,16 +142,19 @@ export function setTravelData () {
 export default function mapData (state = initialMapDataState, action) {
     switch(action.type) {
         case ADD_MAP_DATA:
+            debugger;
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.mapPointData,
                 lastMapPointUpdate: new Date() 
             })
+            debugger;
         case ADD_NEW_MAP_POINT:
             return Object.assign({}, state, {
                 mapboxNewPoint: action.newPoint,
                 isAdding: true
             })
-        case UPDATE_MAP_POINTS:            
+        case UPDATE_MAP_POINTS:   
+            debugger;         
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.points,
                 lastMapPointUpdate: new Date()
@@ -172,7 +178,8 @@ export default function mapData (state = initialMapDataState, action) {
             //     return point
             // })
             // return updatedPoints
-        case UPDATE_WITH_NEW_POINT:    
+        case UPDATE_WITH_NEW_POINT:  
+            debugger;
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.points
             })        

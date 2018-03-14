@@ -16,7 +16,7 @@ function saveToUsersTravel (travel, travelId, uid) {
     debugger;
     return ref.child(`usersTravel/${uid}`)
     //return ref.child(`usersTravel/${uid}/${travelId}`)
-        .set({...travel, travelId})
+        .set({...travel})
 }
 
 export function saveTravel (travel, uid) {
