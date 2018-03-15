@@ -15,6 +15,7 @@ class MapAddTrip extends Component {
     }
 
     _onClick() {
+        console.log("Toggle On")
         this.props.dispatch(toggleEditing())
 
         let newPoint = [{

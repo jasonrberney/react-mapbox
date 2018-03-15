@@ -21,7 +21,7 @@ function saveToUsersTravel (travel, travelId, uid) {
 
 export function saveTravel (travel, uid) {
     const { travelId, travelPromise } = saveToTravel(travel, uid)
-    debugger;
+    
     return Promise.all([
         travelPromise,
         saveToUsersTravel(travel, travelId, uid)
@@ -31,7 +31,6 @@ export function saveTravel (travel, uid) {
 export function listenToTravel (uid, cb, errorCB) {
     ref.child(`usersTravel/${uid}`).on('value', (snapshot) => {
         const travel = snapshot.val() || []
-        debugger;
         cb([travel])
     }, errorCB)
 }

@@ -11,6 +11,7 @@ class ToggleEdit extends Component {
     }
 
     _onClick() {
+        console.log("Toggle")
         this.props.dispatch(toggleEditing())
     }
 

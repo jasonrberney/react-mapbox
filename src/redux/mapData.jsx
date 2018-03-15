@@ -1,11 +1,12 @@
 import { saveTravel, listenToTravel } from '../helpers/api.jsx'
-import { removeMapLayer, updateMapSource } from './mapboxMapInfo.jsx'
+import { removeMapLayer, removeMapSource, updateMapSource } from './mapboxMapInfo.jsx'
 import { addListener } from './listeners.jsx'
 
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
 const MAP_POPUP = 'MAP_POPUP';
 const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
+const REMOVE_NEW_MAP_POINT = 'REMOVE_NEW_MAP_POINT';
 const SUBMIT_NEW_POINT = 'SUBMIT_NEW_POINT';
 const UPDATE_WITH_NEW_POINT = 'UPDATE_WITH_NEW_POINT';
 const TOGGLE_EDITING = 'TOGGLE_EDITING';
@@ -41,6 +42,12 @@ export function addNewMapPoint(newPoint) {
     return {
         type: ADD_NEW_MAP_POINT,
         newPoint
+    }
+}
+
+export function removeNewMapPoint() {
+    return {
+        type: REMOVE_NEW_MAP_POINT
     }
 }
 
@@ -94,17 +101,19 @@ function settingTravelListenerSuccess (duckIds) {
 }
 
 export function mapPointFanout(points) {
-    debugger;
     return function (dispatch, getState) {
 
         const uid = getState().appUsers.authedId
 
         saveTravel(points, uid)
             .then((travelWithId) => {
-                debugger;
                 //dispatch(updateWithNewPoint(points))
                 dispatch(removeMapLayer('newPointLayer'))
+                //dispatch(removeMapLayer('newPointSource'))
                 //dispatch(updateMapSource(points))
+                console.log("Toggle Off")
+                console.log(getState())
+                debugger;
                 dispatch(toggleEditing())
             })
             .catch((err) => {
@@ -114,7 +123,6 @@ export function mapPointFanout(points) {
 }
 
 export function setTravelData () {
-    debugger;
     let initialFetch = true;
     return function (dispatch, getState) {
 
@@ -130,9 +138,10 @@ export function setTravelData () {
         listenToTravel(uid, ([travel]) => {
             debugger;
             initialFetch === true
-                ? dispatch(addDefaultMapData(travel)) 
+                ? dispatch(addDefaultMapData(travel))
                 : dispatch(updateMapPoints(travel)) 
             initialFetch = false
+            dispatch(settingTravelListenerSuccess())
             dispatch(updateMapSource(travel))
             console.log(getState())
         }, (error) => dispatch(settingTravelListenerError(error)))
@@ -142,19 +151,21 @@ export function setTravelData () {
 export default function mapData (state = initialMapDataState, action) {
     switch(action.type) {
         case ADD_MAP_DATA:
-            debugger;
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.mapPointData,
                 lastMapPointUpdate: new Date() 
             })
-            debugger;
         case ADD_NEW_MAP_POINT:
             return Object.assign({}, state, {
                 mapboxNewPoint: action.newPoint,
                 isAdding: true
             })
+        case REMOVE_NEW_MAP_POINT:
+            return Object.assign({}, state, {
+                mapboxNewPoint: [],
+                isAdding: false
+            })
         case UPDATE_MAP_POINTS:   
-            debugger;         
             return Object.assign({}, state, {
                 mapboxDataFeatures: action.points,
                 lastMapPointUpdate: new Date()
@@ -196,6 +207,7 @@ export default function mapData (state = initialMapDataState, action) {
                 popup: action.popup
             })
         case TOGGLE_EDITING:
+            debugger;
             return Object.assign({}, state, {
                 isEditing: !state.isEditing
             })

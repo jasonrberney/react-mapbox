@@ -43,9 +43,10 @@ export function updateMapSource (points) {
     }
 }
 
-export function removeMapSource() {
+export function removeMapSource(source) {
     return {
-        type: REMOVE_MAP_SOURCE
+        type: REMOVE_MAP_SOURCE,
+        source
     }
 }
 
@@ -84,13 +85,14 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 basemap: action.basemap
             })
         case UPDATE_MAP_SOURCE:
-            debugger;
             state.mapboxMap.getSource('mapPointsSource').setData({
                 type: "FeatureCollection",
                 features: action.points
             })
         case REMOVE_MAP_LAYER:
             state.mapboxMap.removeLayer(action.layer)
+        case REMOVE_MAP_SOURCE:
+            state.mapboxMap.removeSource(action.source)
         default:
             return state
     }
