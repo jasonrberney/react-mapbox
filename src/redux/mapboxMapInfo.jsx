@@ -70,6 +70,7 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 zoom: action.zoom,
             })
         case CHANGE_BASEMAP:
+            debugger;
             //let newMap = state.mapboxMap
             //let replaceSource = state.mapboxMap.getSource('mapPointsSource');
             //let replaceLayer = state.mapboxMap.getLayer('mapPointsLayer');
@@ -85,15 +86,17 @@ export default function mapboxMapInfo (state = initialMapState, action) {
                 basemap: action.basemap
             })
         case UPDATE_MAP_SOURCE:
-            debugger;
             state.mapboxMap.getSource('mapPointsSource').setData({
                 type: "FeatureCollection",
                 features: action.points
             })
+            return state
         case REMOVE_MAP_LAYER:
             state.mapboxMap.removeLayer(action.layer)
+            return state
         case REMOVE_MAP_SOURCE:
             state.mapboxMap.removeSource(action.source)
+            return state
         default:
             return state
     }
