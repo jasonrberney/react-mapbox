@@ -1,6 +1,7 @@
 import auth, { saveUser } from '../helpers/auth.jsx'
 import logout from '../helpers/auth.jsx'
 import { formatUserInfo } from '../helpers/utils.jsx'
+import { removeListener } from './listeners.jsx'
 
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
@@ -60,6 +61,7 @@ export function fetchAndHandleAuthedUser () {
     })
     .then(({user}) => saveUser(user))
     .then((user) => dispatch(authUser(user.uid)))
+    .then(() => dispatch(removeListener('travelData')))
     .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }

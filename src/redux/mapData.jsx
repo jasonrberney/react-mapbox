@@ -150,12 +150,11 @@ export function setTravelData () {
             dispatch(toggleEditing(false))
 
             if (getState().mapboxMapInfo.mapboxMap.getLayer('newPointLayer')) {
-                debugger;
                 dispatch(removeMapLayer('newPointLayer'))
                 dispatch(removeMapSource('newPointSource'))
             }
 
-            debugger;
+            //debugger;
             dispatch(updateMapSource(travel))
             
             //dispatch(toggleEditing())

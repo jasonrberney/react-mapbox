@@ -35,6 +35,7 @@ class MapJournal extends Component {
 
         mapboxMap.on('load', () => {
 
+            debugger;
             if (!isDefaultMapData) {
                 this.props.dispatch(setTravelData())
             }

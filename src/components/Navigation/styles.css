@@ -26,6 +26,10 @@
     padding: 0 10px;
 }
 
+.navContainer li.addAdventure {
+    padding: 0 100px;
+}
+
 .active {
     font-weight: bold;
 }
