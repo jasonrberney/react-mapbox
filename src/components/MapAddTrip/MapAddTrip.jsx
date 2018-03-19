@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { dispatch } from 'redux'
 import { store } from '../../index.js'
 import MapJournalPopup from '../MapJournal/MapJournalPopup.jsx'
-import { addNewMapPoint, toggleEditing, mapPopup } from '../../redux/mapData.jsx'
+import { addNewMapPoint, toggleEditing, mapPopup, removeMapPopup } from '../../redux/mapData.jsx'
 import { addTrip } from './styles.css'
 
 class MapAddTrip extends Component {
@@ -17,6 +17,11 @@ class MapAddTrip extends Component {
     _onClick() {
         console.log("Toggle On")
         this.props.dispatch(toggleEditing(true))
+        if (this.props.data.popup !== null) {
+            debugger;
+            this.props.dispatch(removeMapPopup());
+            this.props.data.popup.remove();
+        }
 
         let newPointId = 0;
         for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {

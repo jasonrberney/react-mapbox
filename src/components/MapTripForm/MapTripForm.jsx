@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
-import { updateMapPoints, toggleEditing } from '../../redux/mapData.jsx'
+import { updateMapPoints, toggleEditing, mapPointFanout } from '../../redux/mapData.jsx'
 import { updateMapSource } from '../../redux/mapboxMapInfo.jsx'
 
 class MapTripForm extends Component {
@@ -49,10 +49,12 @@ class MapTripForm extends Component {
             return point
         })
 
-        this.props.dispatch(updateMapPoints(updatedPoints))
-        this.props.dispatch(updateMapSource(updatedPoints))
-        console.log("Toggle Off")
-        this.props.dispatch(toggleEditing(false))
+        //debugger;
+        this.props.dispatch(mapPointFanout(updatedPoints))
+        // this.props.dispatch(updateMapPoints(updatedPoints))
+        // this.props.dispatch(updateMapSource(updatedPoints))
+        // console.log("Toggle Off")
+        // this.props.dispatch(toggleEditing(false))
 
     }
 

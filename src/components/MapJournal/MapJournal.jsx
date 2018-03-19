@@ -10,7 +10,7 @@ import { connect, Provider } from 'react-redux'
 import { dispatch } from 'redux'
 import DefaultData from '../../helpers/DefaultData.jsx'
 import { setMapboxMap, changeLatLngZoom } from '../../redux/mapboxMapInfo.jsx'
-import { addDefaultMapData, setTravelData } from '../../redux/mapData.jsx'
+import { addDefaultMapData, setTravelData, mapPopup } from '../../redux/mapData.jsx'
 import { store } from '../../index.js'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
@@ -91,18 +91,23 @@ class MapJournal extends Component {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
 
-            new mapboxgl.Popup({closeOnClick:false})
+            let popup = new mapboxgl.Popup({closeOnClick:false})
                 .setLngLat(coordinates)
                 //.setHTML(`<div><strong>${title}</strong><p>${experience}</p></div>`)
                 .setHTML(`<div id='popup'></div>`)
                 //.setHTML(`${<MapJournalPopup />}`)
                 //.setHTML(myPopup(e.features[0]))
                 .addTo(this.props.mapInfo.mapboxMap)
-                .isOpen(ReactDOM.render(<Provider store={store}>
-                                            <MapJournalPopup feature={e.features[0]}/>
-                                        </Provider>, 
-                                        document.getElementById('popup')))
-
+                // .isOpen(ReactDOM.render(<Provider store={store}>
+                //                             <MapJournalPopup feature={e.features[0]}/>
+                //                         </Provider>, 
+                //                         document.getElementById('popup')))
+            ReactDOM.render(<Provider store={store}>
+                                <MapJournalPopup feature={e.features[0]}/>
+                            </Provider>, 
+                            document.getElementById('popup'));
+                            
+            this.props.dispatch(mapPopup(popup));
             // setTimeout(() => {
             //     ReactDOM.render(<MapJournalPopup />, document.getElementById('popup'))
             // }, 500)

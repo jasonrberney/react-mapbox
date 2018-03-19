@@ -5,6 +5,7 @@ import { addListener } from './listeners.jsx'
 const ADD_MAP_DATA = 'ADD_MAP_DATA';
 const UPDATE_MAP_POINTS = 'UPDATE_MAP_POINTS';
 const MAP_POPUP = 'MAP_POPUP';
+const REMOVE_MAP_POPUP = 'REMOVE_MAP_POPUP';
 const ADD_NEW_MAP_POINT = 'ADD_NEW_MAP_POINT';
 const REMOVE_NEW_MAP_POINT = 'REMOVE_NEW_MAP_POINT';
 const SUBMIT_NEW_POINT = 'SUBMIT_NEW_POINT';
@@ -70,6 +71,12 @@ export function mapPopup(popup) {
     return {
         type: MAP_POPUP,
         popup
+    }
+}
+
+export function removeMapPopup() {
+    return {
+        type: REMOVE_MAP_POPUP
     }
 }
 
@@ -221,6 +228,10 @@ export default function mapData (state = initialMapDataState, action) {
         case MAP_POPUP:
             return Object.assign({}, state, {
                 popup: action.popup
+            })
+        case MAP_POPUP:
+            return Object.assign({}, state, {
+                popup: null
             })
         case TOGGLE_EDITING:
             //debugger;
