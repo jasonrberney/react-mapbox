@@ -52,7 +52,7 @@ class MapTripForm extends Component {
         this.props.dispatch(updateMapPoints(updatedPoints))
         this.props.dispatch(updateMapSource(updatedPoints))
         console.log("Toggle Off")
-        this.props.dispatch(toggleEditing())
+        this.props.dispatch(toggleEditing(false))
 
     }
 

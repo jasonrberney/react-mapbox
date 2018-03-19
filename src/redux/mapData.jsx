@@ -73,9 +73,10 @@ export function mapPopup(popup) {
     }
 }
 
-export function toggleEditing() {
+export function toggleEditing(editing) {
     return {
-        type: TOGGLE_EDITING
+        type: TOGGLE_EDITING,
+        editing
     }
 }
 
@@ -108,13 +109,17 @@ export function mapPointFanout(points) {
         saveTravel(points, uid)
             .then((travelWithId) => {
                 //dispatch(updateWithNewPoint(points))
-                dispatch(removeMapLayer('newPointLayer'))
-                //dispatch(removeMapLayer('newPointSource'))
-                //dispatch(updateMapSource(points))
+                if (getState().mapboxMapInfo.mapboxMap.getLayer('newPointLayer')) {
+                    debugger;
+                    dispatch(removeMapLayer('newPointLayer'))
+                    dispatch(removeMapSource('newPointSource'))
+                }
+
+                dispatch(updateMapSource(points))
                 console.log("Toggle Off")
+                dispatch(toggleEditing(false))
                 console.log(getState())
                 debugger;
-                dispatch(toggleEditing())
             })
             .catch((err) => {
                 console.warn('Error in mapPointFanout', err)
@@ -136,14 +141,26 @@ export function setTravelData () {
         const uid = getState().appUsers.authedId;
 
         listenToTravel(uid, ([travel]) => {
-            debugger;
+
             initialFetch === true
                 ? dispatch(addDefaultMapData(travel))
                 : dispatch(updateMapPoints(travel)) 
             initialFetch = false
-            dispatch(settingTravelListenerSuccess())
+            console.log("Toggle Off")
+            dispatch(toggleEditing(false))
+
+            if (getState().mapboxMapInfo.mapboxMap.getLayer('newPointLayer')) {
+                debugger;
+                dispatch(removeMapLayer('newPointLayer'))
+                dispatch(removeMapSource('newPointSource'))
+            }
+
+            debugger;
             dispatch(updateMapSource(travel))
+            
+            //dispatch(toggleEditing())
             console.log(getState())
+            dispatch(settingTravelListenerSuccess())
         }, (error) => dispatch(settingTravelListenerError(error)))
     }
 }
@@ -207,9 +224,9 @@ export default function mapData (state = initialMapDataState, action) {
                 popup: action.popup
             })
         case TOGGLE_EDITING:
-            debugger;
+            //debugger;
             return Object.assign({}, state, {
-                isEditing: !state.isEditing
+                isEditing: action.editing
             })
         case SETTING_TRAVEL_LISTENER:
             return {

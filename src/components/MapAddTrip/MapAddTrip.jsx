@@ -16,10 +16,21 @@ class MapAddTrip extends Component {
 
     _onClick() {
         console.log("Toggle On")
-        this.props.dispatch(toggleEditing())
+        this.props.dispatch(toggleEditing(true))
+
+        let newPointId = 0;
+        for(let i = 0; i < this.props.data.mapboxDataFeatures.length; i++) {
+            if (this.props.data.mapboxDataFeatures[i].id >= newPointId) {
+                newPointId = i + 1;
+                continue;
+            }
+            else {
+                newPointId = i;
+            }
+        }
 
         let newPoint = [{
-            id: 4,
+            id: newPointId,
             type: "Feature",
             properties: {
                 title: '',

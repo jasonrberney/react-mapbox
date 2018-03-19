@@ -49,7 +49,8 @@ class MapJournalPopup extends Component {
             }
         }
 
-        debugger;
+        console.log("pointIndex: " + pointIndex)
+        //debugger;
         return (
             <div>
                 {this.props.data.isEditing 
