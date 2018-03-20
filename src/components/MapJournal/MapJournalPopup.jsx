@@ -50,7 +50,6 @@ class MapJournalPopup extends Component {
             }
         }
 
-        console.log("pointIndex: " + pointIndex)
         //debugger;
         return (
             <div>

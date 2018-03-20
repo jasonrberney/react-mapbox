@@ -1,0 +1,39 @@
+.submitTravel {
+    font-size: 18px;
+    font-family: serif;
+    padding: 4px 12px;
+    margin: 0 0px 0 0;
+    background-color: #9CBA7F;
+    color: black;
+    border: 1px solid black;
+    transition-duration: 0.4s;
+}
+
+.submitTravel:hover {
+    background-color: #4a90e2;
+    cursor: pointer;
+}
+
+.expTextAreaContainer {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    margin: 5px;
+}
+  
+.expTextArea {
+    flex: 1;
+    border-radius: 3px;
+    padding: 0px 5px;
+    font-size: 18px;
+    font-family: serif;
+    resize: none;
+}
+
+.titleTextArea {
+    border-radius: 3px;
+    padding: 0px 5px;
+    font-size: 18px;
+    font-family: serif;
+    resize: none;
+}

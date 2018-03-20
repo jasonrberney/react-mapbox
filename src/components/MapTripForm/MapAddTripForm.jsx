@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { dispatch } from 'redux'
 import { updateWithNewPoint, toggleEditing, submitNewPoint, mapPointFanout } from '../../redux/mapData.jsx'
 import { updateMapSource, removeMapSource, removeMapLayer } from '../../redux/mapboxMapInfo.jsx'
+import { submitTravel, expTextAreaContainer, expTextArea, titleTextArea } from './styles.css'
 
 class MapAddTripForm extends Component {
     constructor(props) {
@@ -49,10 +50,10 @@ class MapAddTripForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this._onSubmit}>
-                <input type='text' value={this.state.title} onChange={this._titleChange}/><br />
-                <input type='text' value={this.state.experience} onChange={this._experienceChange}/><br />
-                <input type='submit' />
+            <form className={expTextAreaContainer} onSubmit={this._onSubmit}>
+                <input className={titleTextArea} type='text' value={this.state.title} onChange={this._titleChange}/><br />
+                <textarea className={expTextArea} type='text' maxLength ={250} value={this.state.experience} onChange={this._experienceChange}/><br />
+                <input className={submitTravel} type='submit' />
             </form>
         )
     }
