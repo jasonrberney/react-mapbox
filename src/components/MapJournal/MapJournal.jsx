@@ -35,7 +35,6 @@ class MapJournal extends Component {
 
         mapboxMap.on('load', () => {
 
-            debugger;
             if (!isDefaultMapData) {
                 this.props.dispatch(setTravelData())
             }
@@ -106,7 +105,7 @@ class MapJournal extends Component {
                                 <MapJournalPopup feature={e.features[0]}/>
                             </Provider>, 
                             document.getElementById('popup'));
-                            
+
             this.props.dispatch(mapPopup(popup));
             // setTimeout(() => {
             //     ReactDOM.render(<MapJournalPopup />, document.getElementById('popup'))

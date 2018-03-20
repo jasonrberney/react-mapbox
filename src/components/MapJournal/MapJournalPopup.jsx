@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
 import MapTripForm from '../MapTripForm/MapTripForm.jsx'
 import MapAddTripForm from '../MapTripForm/MapAddTripForm.jsx'
+import { flyHere } from './styles.css'
 //import { Popup } from 'react-mapbox-gl'
 
 class MapJournalPopup extends Component {
@@ -71,7 +72,7 @@ class MapJournalPopup extends Component {
                         <div>
                             <h2>{this.props.data.mapboxDataFeatures[pointIndex].properties.title}</h2>
                             <p>{this.props.data.mapboxDataFeatures[pointIndex].properties.experience}</p>
-                            <button onClick={this._onClick}>{'Fly Here'}</button>
+                            <button className={flyHere} onClick={this._onClick}>{'Fly Here'}</button>
                             <ToggleEdit />
                         </div>
                 }

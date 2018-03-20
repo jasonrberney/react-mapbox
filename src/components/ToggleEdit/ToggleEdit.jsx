@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { dispatch } from 'redux'
 import { toggleEditing } from '../../redux/mapData.jsx'
+import { editToggle } from './styles.css'
 
 class ToggleEdit extends Component {
     constructor(props){
@@ -17,7 +18,7 @@ class ToggleEdit extends Component {
 
     render() {
         return (
-            <button onClick={this._onClick}>{'Edit'}</button>
+            <button className={editToggle} onClick={this._onClick}>{'Edit'}</button>
         )
     }
 }

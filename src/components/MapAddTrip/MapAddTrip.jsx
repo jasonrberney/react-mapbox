@@ -17,8 +17,9 @@ class MapAddTrip extends Component {
     _onClick() {
         console.log("Toggle On")
         this.props.dispatch(toggleEditing(true))
+        
+        // remove popup from map
         if (this.props.data.popup !== null) {
-            debugger;
             this.props.dispatch(removeMapPopup());
             this.props.data.popup.remove();
         }

@@ -27,3 +27,19 @@
     right: 0;
     z-index: 1;
 }
+
+.flyHere {
+    font-size: 18px;
+    font-family: serif;
+    padding: 4px 12px;
+    margin: 0 5px 0 0;
+    background-color: #9CBA7F;
+    color: black;
+    border: 1px solid black;
+    transition-duration: 0.4s;
+}
+
+.flyHere:hover {
+    background-color: #4a90e2;
+    cursor: pointer;
+}

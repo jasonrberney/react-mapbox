@@ -1,0 +1,14 @@
+.editToggle {
+    font-size: 18px;
+    font-family: serif;
+    padding: 4px 12px;
+    background-color: #9CBA7F;
+    color: black;
+    border: 1px solid black;
+    transition-duration: 0.4s;
+}
+
+.editToggle:hover {
+    background-color: #4a90e2;
+    cursor: pointer;
+}
