@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavigationTest } from '../../components/index.jsx'
+import { Navigation } from '../../components/index.jsx'
 import { connect } from 'react-redux'
 import * as appUsersActionCreators from '../../redux/appUsers.jsx'
 import { formatUserInfo } from '../../helpers/utils.jsx'
@@ -30,7 +30,7 @@ class AppContainer extends Component {
         return this.props.isFetching === true
             ? null
             :   <div>
-                    <NavigationTest isAuthed={this.props.isAuthed}/>
+                    <Navigation isAuthed={this.props.isAuthed}/>
                     {this.props.children}
                 </div>
     }

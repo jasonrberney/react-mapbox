@@ -4,7 +4,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 //import routes from './config/routes.jsx'
-import getRoutes from './config/routesTest.jsx'
+import getRoutes from './config/routes.jsx'
 import mapboxMapInfo from './redux/mapboxMapInfo.jsx';
 import mapData from './redux/mapData.jsx'
 import appUsers from './redux/appUsers.jsx'

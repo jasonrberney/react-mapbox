@@ -1,19 +1,32 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// '../containers' with resolve in const base in webpack config
-import { HomeContainer, MapContainer } from '../containers'
-import Navigation from '../components/Navigation/Navigation.jsx'
+import { Router, hashHistory, IndexRoute, Route } from 'react-router'
+import { AppContainer, HomeContainer, MapContainer, LoginContainer, LogoutContainer } from '../containers'
 
-const routes = (
-    <Router>
-        <div>
-            <Navigation />
-            <Switch>
-                <Route exact path='/' component={HomeContainer} />
-                <Route path='/mapjournal' component={MapContainer} />
-            </Switch>
-        </div>
-    </Router>
-)
 
-export default routes
+export default function getRoutes(checkAuth) {
+    return(
+        <Router history={hashHistory}>
+            <Router path='/' component={AppContainer}>
+                <Route path='/mapjournal' component={MapContainer} onEnter={checkAuth}/>
+                <Route path='/auth' component={LoginContainer} onEnter={checkAuth}/>
+                <Route path='/logout' component={LogoutContainer} />
+                {/* If none of the Routes match, you'll always go to the index route. */}
+                <IndexRoute component={HomeContainer} onEnter={checkAuth}/>
+            </Router>
+        </Router>
+    )
+}
+
+// THE BELOW WAS USED BEFORE USING ROUTE PROTECTION.
+// const routes = (
+//     <Router history={hashHistory}>
+//         <Router path='/' component={AppContainer}>
+//             <Route path='/mapjournal' component={MapContainer}/>
+//             <Route path='/auth' component={LoginContainer} />
+//             {/* If none of the Routes match, you'll always go to the index route. */}
+//             <IndexRoute component={HomeContainer} />
+//         </Router>
+//     </Router>
+// )
+
+// export default routes

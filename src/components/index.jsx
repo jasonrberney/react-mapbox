@@ -1,6 +1,5 @@
 export Home from './Home/Home.jsx'
 export Navigation from './Navigation/Navigation.jsx'
-export NavigationTest from './Navigation/NavigationTest.jsx'
 export Login from './Login/Login.jsx'
 export FacebookAuthButton from './FacebookAuthButton/FacebookAuthButton.jsx'
 export Logout from './Logout/Logout.jsx'
