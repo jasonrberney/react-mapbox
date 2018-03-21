@@ -86,7 +86,10 @@ class MapAddTrip extends Component {
 
     render() {
         return (
-            <button className={addTrip} onClick={this._onClick}>
+            <button 
+                className={addTrip} 
+                onClick={this._onClick}
+                disabled={this.props.data.isAdding}>
                 {'Add an Adventure'}
             </button>
         )

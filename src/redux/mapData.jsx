@@ -117,7 +117,7 @@ export function mapPointFanout(points) {
             .then((travelWithId) => {
                 //dispatch(updateWithNewPoint(points))
                 if (getState().mapboxMapInfo.mapboxMap.getLayer('newPointLayer')) {
-                    debugger;
+                    //debugger;
                     dispatch(removeMapLayer('newPointLayer'))
                     dispatch(removeMapSource('newPointSource'))
                 }
@@ -126,7 +126,7 @@ export function mapPointFanout(points) {
                 console.log("Toggle Off")
                 dispatch(toggleEditing(false))
                 console.log(getState())
-                debugger;
+                //debugger;
             })
             .catch((err) => {
                 console.warn('Error in mapPointFanout', err)

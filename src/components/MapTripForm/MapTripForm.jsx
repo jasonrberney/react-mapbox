@@ -61,8 +61,8 @@ class MapTripForm extends Component {
     render() {
         return (
             <form className={expTextAreaContainer} onSubmit={this._onSubmit}>
-                <input className={titleTextArea} type='text' value={this.state.title} onChange={this._titleChange}/><br />
-                <textarea className={expTextArea} type='text' maxLength ={250} value={this.state.experience} onChange={this._experienceChange}/><br />
+                <input className={titleTextArea} type='text' placeholder="Enter a location..." value={this.state.title} onChange={this._titleChange}/><br />
+                <textarea className={expTextArea} type='text' placeholder="Enter an unforgettable experience..." maxLength ={250} value={this.state.experience} onChange={this._experienceChange}/><br />
                 <input className={submitTravel} type='submit' />
             </form>
         )
