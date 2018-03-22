@@ -49,7 +49,6 @@ class MapTripForm extends Component {
             return point
         })
 
-        //debugger;
         this.props.dispatch(mapPointFanout(updatedPoints))
         // this.props.dispatch(updateMapPoints(updatedPoints))
         // this.props.dispatch(updateMapSource(updatedPoints))

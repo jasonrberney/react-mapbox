@@ -13,7 +13,6 @@ class BasemapSelector extends Component {
 
     _onChange (e) {
         this.props.dispatch(changeBasemap(e.currentTarget.name))
-
     }
 
     render () {

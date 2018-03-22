@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import Login from '../../components/Login/Login.jsx'
-//import auth from '../../helpers/auth.jsx'
 import { connect } from 'react-redux'
 import { bindActionCreators, dispatch } from 'redux'
 import * as appUsersActionCreators from '../../redux/appUsers.jsx'

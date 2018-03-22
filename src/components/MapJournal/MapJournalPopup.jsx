@@ -4,7 +4,6 @@ import ToggleEdit from '../ToggleEdit/ToggleEdit.jsx'
 import MapTripForm from '../MapTripForm/MapTripForm.jsx'
 import MapAddTripForm from '../MapTripForm/MapAddTripForm.jsx'
 import { flyHere } from './styles.css'
-//import { Popup } from 'react-mapbox-gl'
 
 class MapJournalPopup extends Component {
     constructor(props) {
@@ -50,7 +49,6 @@ class MapJournalPopup extends Component {
             }
         }
 
-        //debugger;
         return (
             <div>
                 {this.props.data.isEditing 
