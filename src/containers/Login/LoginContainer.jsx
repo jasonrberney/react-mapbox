@@ -29,7 +29,7 @@ class LoginContainer extends Component {
 
     render() {
         return (
-            <Login isFetching={this.props.isFetching} error={this.props.error} onAuth={this.handleAuth} />
+            <Login isFetching={this.props.isFetching} error={this.props.error} onAuth={this.handleAuth} isAuthed={this.props.isAuthed} />
         )
     }
 }
@@ -38,6 +38,7 @@ function mapStateToProps(state) {
     console.log('STATE', state)
     return {
         isFetching: state.appUsers.isFetching,
+        isAuthed: state.appUsers.isAuthed,
         error: state.appUsers.error,
     }
 }

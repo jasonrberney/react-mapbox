@@ -5,7 +5,7 @@ import { dispatch } from 'redux'
 import { store } from '../../index.js'
 import MapJournalPopup from '../MapJournal/MapJournalPopup.jsx'
 import { addNewMapPoint, toggleEditing, mapPopup, removeMapPopup } from '../../redux/mapData.jsx'
-import { addTrip } from './styles.css'
+import { addTrip, addTripDisabled } from './styles.css'
 
 class MapAddTrip extends Component {
     constructor(props) {
@@ -86,12 +86,24 @@ class MapAddTrip extends Component {
 
     render() {
         return (
-            <button 
-                className={addTrip} 
-                onClick={this._onClick}
-                disabled={this.props.data.isAdding}>
-                {'Add an Adventure'}
-            </button>
+            <div>
+                {this.props.data.isAdding
+                ?
+                    <button 
+                        className={addTripDisabled} 
+                        onClick={this._onClick}
+                        disabled={true}>
+                        {'Submit your Adventure'}
+                    </button>
+                :
+                    <button 
+                        className={addTrip} 
+                        onClick={this._onClick}
+                        disabled={false}>
+                        {'Add an Adventure'}
+                    </button>
+                }
+            </div>
         )
     }
 }
