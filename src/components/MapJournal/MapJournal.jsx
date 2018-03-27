@@ -12,6 +12,7 @@ import DefaultData from '../../helpers/DefaultData.jsx'
 import { setMapboxMap, changeLatLngZoom } from '../../redux/mapboxMapInfo.jsx'
 import { addDefaultMapData, setTravelData, mapPopup } from '../../redux/mapData.jsx'
 import { store } from '../../index.js'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFzb25yYmVybmV5IiwiYSI6ImNqZDZsejMwNTF2OGIyd3FybXgycWZjajMifQ.SHNdahZGOVsIMFyGEoUIPw'
 
@@ -203,6 +204,10 @@ class MapJournal extends Component {
             // Unbind mouse events
             mapboxMap.off('mousemove');
         })
+
+        mapboxMap.addControl(new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken
+        }));
     }
     
     render () {
@@ -219,7 +224,7 @@ class MapJournal extends Component {
                     <div className={latlng}>
                         <div>{`Longitude: ${this.props.mapInfo.lng} Latitude: ${this.props.mapInfo.lat} Zoom: ${this.props.mapInfo.zoom}`}</div>
                     </div>
-                    <BasemapSelector />
+                    {/* <BasemapSelector /> */}
                 </div>
             </div>
         )
