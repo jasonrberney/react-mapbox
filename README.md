@@ -2,7 +2,9 @@
 
 Repository contains a React application featuring the Mapbox mapping platform. The application features react-router and redux. The prupose of the application is to create an interactive journal to map and save locations where you have traveled. 
 
-I've always wanted a map hanging on my wall with a pins stuck in it that represent places I've been. Then I thought, why not just make an app for that? Please feel free to contribute. 
+I've always wanted a mechanism for representing places I've been. Then I thought, why not just make an app for that? Please feel free to contribute. 
+
+A live version of the application can be viewed here: https://travelyoung-c743b.firebaseapp.com/
 
 ## Getting Started
 
